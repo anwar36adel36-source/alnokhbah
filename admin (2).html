@@ -1,0 +1,4293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>لوحة إدارة متجر النخبة</title>
+
+<style>
+:root{
+ --green:#002b20;
+ --green2:#07392b;
+ --gold:#d4a34e;
+ --cream:#fffaf1;
+ --white:#fff;
+ --ink:#151c18;
+ --red:#9b2525;
+ --border:#dfc38e;
+ --success:#17643d;
+}
+
+*{
+ box-sizing:border-box;
+}
+
+html{
+ scroll-behavior:smooth;
+}
+
+body{
+ margin:0;
+ background:var(--cream);
+ color:var(--ink);
+ font-family:Tahoma,Arial,sans-serif;
+}
+
+img{
+ max-width:100%;
+ display:block;
+}
+
+header{
+ background:var(--green);
+ color:#fff;
+ border-bottom:2px solid var(--gold);
+ padding:20px;
+}
+
+.header-inner{
+ width:min(1200px,94%);
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+}
+
+header h1{
+ margin:0;
+ color:#f0c36d;
+ font-size:25px;
+}
+
+header .subtitle{
+ margin-top:6px;
+ font-size:13px;
+ opacity:.9;
+}
+
+.store-link{
+ background:var(--gold);
+ color:var(--green);
+ padding:10px 16px;
+ border-radius:8px;
+ text-decoration:none;
+ font-weight:bold;
+}
+
+.container{
+ width:min(1200px,94%);
+ margin:25px auto 50px;
+}
+
+.notice{
+ background:#fff8e8;
+ border:1px solid var(--border);
+ border-radius:12px;
+ padding:14px;
+ margin-bottom:20px;
+ line-height:1.8;
+}
+
+.panel{
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:18px;
+ margin-bottom:20px;
+}
+
+.panel h2{
+ margin:0 0 18px;
+ color:var(--green);
+}
+
+label{
+ display:block;
+ margin:13px 0 6px;
+ font-weight:bold;
+ font-size:13px;
+}
+
+input,
+textarea,
+select{
+ width:100%;
+ border:1px solid #d7bd8d;
+ border-radius:8px;
+ padding:11px;
+ background:#fffdf8;
+ font-family:inherit;
+ font-size:14px;
+}
+
+textarea{
+ min-height:90px;
+ resize:vertical;
+}
+
+.help{
+ display:block;
+ color:#756b5b;
+ font-size:11px;
+ margin-top:5px;
+ line-height:1.6;
+}
+
+button{
+ font-family:inherit;
+ cursor:pointer;
+}
+
+.save{
+ border:0;
+ background:var(--green);
+ color:#fff;
+ border-radius:8px;
+ padding:12px;
+ font-weight:bold;
+}
+
+.cancel{
+ border:1px solid var(--border);
+ background:#fff;
+ color:var(--green);
+ border-radius:8px;
+ padding:12px;
+}
+
+.reset{
+ border:1px solid var(--red);
+ color:var(--red);
+ background:#fff;
+ border-radius:8px;
+ padding:9px 12px;
+}
+
+.form-actions{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:8px;
+ margin-top:18px;
+}
+
+.danger-zone{
+ margin-top:20px;
+ padding-top:15px;
+ border-top:1px solid #eee0c6;
+}
+
+
+/* =====================================
+   رسالة الحفظ
+===================================== */
+
+.admin-message{
+ display:none;
+ position:fixed;
+ top:20px;
+ left:50%;
+ transform:translateX(-50%);
+ z-index:9999;
+ min-width:280px;
+ max-width:90%;
+ padding:13px 20px;
+ border-radius:10px;
+ background:var(--green);
+ color:#fff;
+ box-shadow:0 5px 25px rgba(0,0,0,.2);
+ text-align:center;
+ font-size:13px;
+}
+
+
+/* =====================================
+   إعدادات المتجر
+===================================== */
+
+.settings-layout{
+ display:grid;
+ grid-template-columns:1fr 330px;
+ gap:25px;
+ align-items:start;
+}
+
+.settings-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:0 15px;
+}
+
+.full{
+ grid-column:1/-1;
+}
+
+.logo-preview{
+ width:100%;
+ min-height:220px;
+ border:1px dashed var(--border);
+ border-radius:14px;
+ background:#fffaf1;
+ display:grid;
+ place-items:center;
+ padding:15px;
+ color:#817664;
+ text-align:center;
+}
+
+.logo-preview img{
+ max-width:220px;
+ max-height:180px;
+ object-fit:contain;
+}
+
+.settings-preview-info{
+ margin-top:12px;
+ background:var(--green);
+ color:#fff;
+ padding:15px;
+ border-radius:12px;
+ line-height:1.9;
+ font-size:13px;
+}
+
+.settings-preview-info strong{
+ color:#f0c36d;
+}
+
+.switch-row{
+ margin-top:15px;
+ padding:12px;
+ border:1px solid var(--border);
+ border-radius:10px;
+ background:#fffaf1;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+}
+
+.switch-row input{
+ width:22px;
+ height:22px;
+ cursor:pointer;
+}
+
+
+/* =====================================
+   البانر
+===================================== */
+
+.banner-layout{
+ display:grid;
+ grid-template-columns:360px 1fr;
+ gap:20px;
+ align-items:start;
+}
+
+.banner-preview{
+ width:100%;
+ aspect-ratio:1024/465;
+ border:1px solid var(--border);
+ border-radius:14px;
+ overflow:hidden;
+ background:#eee;
+ display:grid;
+ place-items:center;
+ color:#777;
+}
+
+.banner-preview img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+}
+
+.banner-info{
+ background:#fffaf1;
+ border:1px solid var(--border);
+ border-radius:12px;
+ padding:14px;
+ margin-bottom:15px;
+ line-height:1.8;
+ font-size:13px;
+}
+
+
+/* =====================================
+   الأقسام
+===================================== */
+
+.categories-grid{
+ display:grid;
+ grid-template-columns:repeat(5,minmax(0,1fr));
+ gap:12px;
+}
+
+.category-card{
+ border:1px solid var(--border);
+ border-radius:12px;
+ padding:10px;
+ background:#fffdf8;
+ text-align:center;
+}
+
+.category-card img{
+ width:100%;
+ height:120px;
+ object-fit:contain;
+ border-radius:9px;
+ background:#fffaf1;
+}
+
+.category-card h3{
+ margin:9px 0 5px;
+ color:var(--green);
+ font-size:15px;
+}
+
+.category-card p{
+ margin:0 0 10px;
+ color:#756b5b;
+ font-size:11px;
+ min-height:35px;
+ line-height:1.6;
+}
+
+.category-edit{
+ width:100%;
+ border:0;
+ background:var(--green2);
+ color:#fff;
+ border-radius:6px;
+ padding:9px;
+}
+
+.category-editor{
+ display:none;
+ max-width:600px;
+ margin:25px auto 0;
+ padding:18px;
+ border:1px solid var(--border);
+ border-radius:12px;
+ background:#fffaf1;
+}
+
+.category-preview{
+ width:100%;
+ height:180px;
+ margin-top:10px;
+ border:1px dashed var(--border);
+ border-radius:10px;
+ display:grid;
+ place-items:center;
+ overflow:hidden;
+ color:#827765;
+}
+
+.category-preview img{
+ width:100%;
+ height:100%;
+ object-fit:contain;
+}
+
+
+/* =====================================
+   المنتجات
+===================================== */
+
+.layout{
+ display:grid;
+ grid-template-columns:380px 1fr;
+ gap:20px;
+ align-items:start;
+}
+
+.preview{
+ width:100%;
+ height:190px;
+ margin-top:10px;
+ border:1px dashed #d7bd8d;
+ border-radius:10px;
+ display:grid;
+ place-items:center;
+ overflow:hidden;
+ background:#fffaf1;
+ color:#827765;
+}
+
+.preview img{
+ width:100%;
+ height:100%;
+ object-fit:contain;
+}
+
+.toolbar{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ margin-bottom:15px;
+}
+
+.toolbar input{
+ max-width:330px;
+}
+
+.count{
+ background:var(--green);
+ color:#fff;
+ padding:8px 12px;
+ border-radius:20px;
+ font-size:12px;
+ white-space:nowrap;
+}
+
+.products{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;
+}
+
+.product{
+ border:1px solid var(--border);
+ border-radius:12px;
+ padding:10px;
+ display:grid;
+ grid-template-columns:95px 1fr;
+ gap:12px;
+ background:#fffdf8;
+}
+
+.product img{
+ width:95px;
+ height:95px;
+ object-fit:cover;
+ border-radius:9px;
+ background:#eee;
+}
+
+.product h3{
+ margin:2px 0 5px;
+ font-size:15px;
+}
+
+.product p{
+ margin:4px 0;
+ color:#6a6256;
+ font-size:12px;
+ line-height:1.5;
+}
+
+.badges{
+ display:flex;
+ flex-wrap:wrap;
+ gap:4px;
+ margin-top:7px;
+}
+
+.badge{
+ background:#f5ead4;
+ border:1px solid #dfc38e;
+ padding:3px 6px;
+ border-radius:10px;
+ font-size:10px;
+}
+
+.product-actions{
+ display:flex;
+ gap:6px;
+ margin-top:9px;
+}
+
+.edit{
+ border:0;
+ background:var(--green2);
+ color:#fff;
+ border-radius:6px;
+ padding:7px 11px;
+}
+
+.delete{
+ border:0;
+ background:var(--red);
+ color:#fff;
+ border-radius:6px;
+ padding:7px 11px;
+}
+
+.empty{
+ grid-column:1/-1;
+ text-align:center;
+ padding:40px;
+ border:1px dashed var(--border);
+ border-radius:12px;
+ color:#766c5e;
+}
+
+
+/* =====================================
+   الجوال
+===================================== */
+
+@media(max-width:900px){
+
+ .layout,
+ .banner-layout,
+ .settings-layout{
+  grid-template-columns:1fr;
+ }
+
+ .products{
+  grid-template-columns:1fr;
+ }
+
+ .categories-grid{
+  grid-template-columns:repeat(2,1fr);
+ }
+
+}
+
+@media(max-width:600px){
+
+ .settings-grid{
+  grid-template-columns:1fr;
+ }
+
+ .full{
+  grid-column:auto;
+ }
+
+}
+
+@media(max-width:500px){
+
+ .header-inner{
+  align-items:flex-start;
+  flex-direction:column;
+ }
+
+ .form-actions{
+  grid-template-columns:1fr;
+ }
+
+ .toolbar{
+  align-items:stretch;
+  flex-direction:column;
+ }
+
+ .toolbar input{
+  max-width:none;
+ }
+
+ .product{
+  grid-template-columns:75px 1fr;
+ }
+
+ .product img{
+  width:75px;
+  height:75px;
+ }
+
+ .categories-grid{
+  grid-template-columns:1fr;
+ }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<div
+ class="admin-message"
+ id="adminMessage">
+</div>
+
+
+<header>
+
+ <div class="header-inner">
+
+  <div>
+
+   <h1>
+    ⚙ لوحة إدارة متجر النخبة
+   </h1>
+
+   <div class="subtitle">
+    إدارة إعدادات المتجر والبنر والأقسام والمنتجات
+   </div>
+
+  </div>
+
+  <a
+   class="store-link"
+   href="shop.html">
+   فتح المتجر ←
+  </a>
+
+ </div>
+
+</header>
+
+
+<div class="container">
+
+
+ <div class="notice">
+
+  <strong>لوحة التحكم:</strong>
+
+  يمكنك من هنا تغيير بيانات المتجر والشعار
+  ورقم واتساب والبانر والأقسام والمنتجات.
+
+  <br>
+
+  البيانات تحفظ حاليًا على هذا الجهاز والمتصفح
+  باستخدام LocalStorage.
+
+ </div>
+
+
+ <!-- =====================================
+      إعدادات المتجر
+ ====================================== -->
+
+ <section class="panel">
+
+  <h2>
+   ⚙ إعدادات المتجر
+  </h2>
+
+
+  <div class="settings-layout">
+
+
+   <div>
+
+
+    <div class="settings-grid">
+
+
+     <div>
+
+      <label for="storeName">
+       اسم المتجر
+      </label>
+
+      <input
+       id="storeName"
+       type="text"
+       placeholder="النخبة">
+
+     </div>
+
+
+     <div>
+
+      <label for="storeWhatsapp">
+       رقم واتساب
+      </label>
+
+      <input
+       id="storeWhatsapp"
+       type="tel"
+       inputmode="numeric"
+       placeholder="967734800094">
+
+      <small class="help">
+       أدخل الرقم بصيغة دولية بدون علامة +.
+      </small>
+
+     </div>
+
+
+     <div class="full">
+
+      <label for="storeShippingText">
+       نص التوصيل
+      </label>
+
+      <input
+       id="storeShippingText"
+       type="text"
+       placeholder="🚚 التوصيل إلى جميع اليمن ودول الخليج وأوروبا">
+
+     </div>
+
+
+     <div class="full">
+
+      <label for="storeWhatsappMessage">
+       رسالة واتساب الافتراضية
+      </label>
+
+      <textarea
+       id="storeWhatsappMessage"
+       placeholder="السلام عليكم، أرغب بالاستفسار عن المنتجات المتوفرة."></textarea>
+
+      <small class="help">
+       تستخدم هذه الرسالة عند التواصل العام مع المتجر.
+      </small>
+
+     </div>
+
+
+     <div class="full">
+
+      <label for="storeLogoFile">
+       رفع شعار جديد من الجهاز
+      </label>
+
+      <input
+       id="storeLogoFile"
+       type="file"
+       accept="image/jpeg,image/png,image/webp">
+
+
+      <label for="storeLogo">
+       أو اسم الشعار داخل مجلد images
+      </label>
+
+      <input
+       id="storeLogo"
+       type="text"
+       placeholder="logo-transparent.png">
+
+
+      <small class="help">
+       يمكنك استخدام PNG بخلفية شفافة للحصول على أفضل نتيجة.
+      </small>
+
+     </div>
+
+
+     <div class="full">
+
+      <div class="switch-row">
+
+       <div>
+
+        <strong>
+         إظهار زر التواصل عبر واتساب
+        </strong>
+
+        <div class="help">
+         عند إيقافه يمكن إخفاء زر التواصل من صفحات المتجر.
+        </div>
+
+       </div>
+
+       <input
+        id="showWhatsapp"
+        type="checkbox">
+
+      </div>
+
+     </div>
+
+
+    </div>
+
+
+    <div class="form-actions">
+
+     <button
+      type="button"
+      class="save"
+      id="saveStoreSettings">
+
+      حفظ إعدادات المتجر
+
+     </button>
+
+
+     <button
+      type="button"
+      class="cancel"
+      id="cancelStoreSettings">
+
+      إلغاء التغييرات
+
+     </button>
+
+    </div>
+
+
+   </div>
+
+
+   <div>
+
+    <label>
+     معاينة الشعار
+    </label>
+
+    <div
+     class="logo-preview"
+     id="storeLogoPreview">
+
+     معاينة الشعار
+
+    </div>
+
+
+    <div
+     class="settings-preview-info">
+
+     <strong id="previewStoreName">
+      النخبة
+     </strong>
+
+     <br>
+
+     <span id="previewShippingText">
+      🚚 التوصيل إلى جميع اليمن ودول الخليج وأوروبا
+     </span>
+
+     <br>
+
+     واتساب:
+
+     <span id="previewWhatsapp">
+      967734800094
+     </span>
+
+    </div>
+
+   </div>
+
+
+  </div>
+
+
+  <div class="danger-zone">
+
+   <button
+    type="button"
+    class="reset"
+    id="restoreStoreSettings">
+
+    استعادة إعدادات المتجر الأساسية
+
+   </button>
+
+  </div>
+
+ </section>
+
+
+ <!-- =====================================
+      إدارة البانر
+ ====================================== -->
+
+ <section class="panel">
+
+  <h2>
+   🖼 إدارة البانر الرئيسي
+  </h2>
+
+  <div class="banner-layout">
+
+   <div>
+
+    <div class="banner-info">
+
+     يمكنك تغيير الصورة الكبيرة الموجودة
+     أعلى المتجر.
+
+     <br>
+
+     يفضل استخدام صورة عريضة بنسبة تقريبية
+
+     <strong>
+      1024 × 465
+     </strong>.
+
+    </div>
+
+
+    <label for="bannerImageFile">
+     اختر صورة البانر من الجهاز
+    </label>
+
+    <input
+     id="bannerImageFile"
+     type="file"
+     accept="image/jpeg,image/png,image/webp">
+
+
+    <small class="help">
+     يمكنك رفع JPG أو PNG أو WEBP.
+    </small>
+
+
+    <label for="bannerImage">
+     أو اسم صورة داخل مجلد images
+    </label>
+
+    <input
+     id="bannerImage"
+     type="text"
+     placeholder="مثال: hero-reference.jpg">
+
+
+    <div class="form-actions">
+
+     <button
+      type="button"
+      class="save"
+      id="saveBanner">
+
+      حفظ البانر
+
+     </button>
+
+
+     <button
+      type="button"
+      class="cancel"
+      id="cancelBanner">
+
+      إلغاء
+
+     </button>
+
+    </div>
+
+   </div>
+
+
+   <div>
+
+    <label>
+     معاينة البانر
+    </label>
+
+    <div
+     class="banner-preview"
+     id="bannerPreview">
+
+     معاينة البانر
+
+    </div>
+
+   </div>
+
+  </div>
+
+
+  <div class="danger-zone">
+
+   <button
+    type="button"
+    class="reset"
+    id="restoreBanner">
+
+    استعادة البانر الأساسي
+
+   </button>
+
+  </div>
+
+ </section>
+
+
+ <!-- =====================================
+      إدارة الأقسام
+ ====================================== -->
+
+ <section class="panel">
+
+  <h2>
+   إدارة أقسام المتجر
+  </h2>
+
+  <div
+   class="categories-grid"
+   id="categoriesList">
+  </div>
+
+
+  <div
+   class="category-editor"
+   id="categoryEditor">
+
+
+   <h2 id="categoryEditorTitle">
+    تعديل القسم
+   </h2>
+
+
+   <input
+    type="hidden"
+    id="categoryEditingId">
+
+
+   <label for="categoryTitle">
+    اسم القسم
+   </label>
+
+   <input
+    id="categoryTitle"
+    type="text">
+
+
+   <label for="categoryDescription">
+    الوصف الصغير
+   </label>
+
+   <input
+    id="categoryDescription"
+    type="text">
+
+
+   <label for="categoryImageFile">
+    صورة من الجهاز
+   </label>
+
+   <input
+    id="categoryImageFile"
+    type="file"
+    accept="image/jpeg,image/png,image/webp">
+
+
+   <small class="help">
+
+    اختر صورة جديدة من جهازك،
+    أو استخدم اسم صورة من مجلد images.
+
+   </small>
+
+
+   <label for="categoryImage">
+    أو اسم الصورة داخل مجلد images
+   </label>
+
+   <input
+    id="categoryImage"
+    type="text"
+    placeholder="مثال: honey-light.jpeg">
+
+
+   <div
+    class="category-preview"
+    id="categoryPreview">
+
+    معاينة صورة القسم
+
+   </div>
+
+
+   <div class="form-actions">
+
+    <button
+     class="save"
+     type="button"
+     id="saveCategory">
+
+     حفظ تعديل القسم
+
+    </button>
+
+
+    <button
+     class="cancel"
+     type="button"
+     id="cancelCategory">
+
+     إلغاء
+
+    </button>
+
+   </div>
+
+  </div>
+
+
+  <div class="danger-zone">
+
+   <button
+    class="reset"
+    type="button"
+    id="restoreCategories">
+
+    استعادة الأقسام الأساسية
+
+   </button>
+
+  </div>
+
+ </section>
+
+
+ <!-- =====================================
+      المنتجات
+ ====================================== -->
+
+ <div class="layout">
+
+
+  <section class="panel">
+
+   <h2 id="formTitle">
+    إضافة منتج جديد
+   </h2>
+
+
+   <form id="productForm">
+
+
+    <input
+     type="hidden"
+     id="editingId">
+
+
+    <label for="name">
+     اسم المنتج
+    </label>
+
+    <input
+     id="name"
+     type="text"
+     required>
+
+
+    <label for="category">
+     القسم
+    </label>
+
+
+    <select
+     id="category"
+     required>
+
+     <option value="honey">
+      العسل اليمني
+     </option>
+
+     <option value="coffee">
+      البن اليمني
+     </option>
+
+     <option value="oils">
+      الزيوت الطبيعية
+     </option>
+
+     <option value="offers">
+      العروض والباقات
+     </option>
+
+     <option value="accessories">
+      الإكسسوارات
+     </option>
+
+    </select>
+
+
+    <label for="description">
+     وصف المنتج
+    </label>
+
+    <textarea
+     id="description"
+     required></textarea>
+
+
+    <label for="imageFile">
+     صورة المنتج من الجهاز
+    </label>
+
+    <input
+     id="imageFile"
+     type="file"
+     accept="image/jpeg,image/png,image/webp">
+
+
+    <small class="help">
+     يمكنك اختيار صورة مباشرة من جهازك.
+    </small>
+
+
+    <label for="image">
+     أو اسم الصورة الموجودة داخل مجلد images
+    </label>
+
+    <input
+     id="image"
+     type="text"
+     placeholder="مثال: sidr-royal.jpeg">
+
+
+    <div
+     class="preview"
+     id="imagePreview">
+
+     معاينة الصورة
+
+    </div>
+
+
+    <label for="weights">
+     الأوزان المتاحة
+    </label>
+
+    <input
+     id="weights"
+     type="text"
+     placeholder="500 جم, 1 كجم, 3 كجم"
+     required>
+
+
+    <small class="help">
+     افصل بين الأوزان بفاصلة.
+    </small>
+
+
+    <div class="form-actions">
+
+     <button
+      class="save"
+      type="submit">
+
+      حفظ المنتج
+
+     </button>
+
+
+     <button
+      class="cancel"
+      id="cancelEdit"
+      type="button">
+
+      إلغاء التعديل
+
+     </button>
+
+    </div>
+
+   </form>
+
+  </section>
+
+
+  <section class="panel">
+
+   <div class="toolbar">
+
+    <div>
+
+     <h2 style="margin-bottom:5px">
+      المنتجات
+     </h2>
+
+     <span
+      class="count"
+      id="productCount">
+
+      0 منتج
+
+     </span>
+
+    </div>
+
+
+    <input
+     type="search"
+     id="search"
+     placeholder="بحث عن منتج...">
+
+   </div>
+
+
+   <div
+    class="products"
+    id="productList">
+   </div>
+
+
+   <div class="danger-zone">
+
+    <button
+     type="button"
+     class="reset"
+     id="restoreDefaults">
+
+     استعادة المنتجات الأساسية
+
+    </button>
+
+   </div>
+
+  </section>
+
+ </div>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   البيانات الأساسية
+================================================== */
+
+const defaultStoreSettings = {
+
+ storeName:"النخبة",
+
+ whatsapp:"967734800094",
+
+ shippingText:
+ "🚚 التوصيل إلى جميع اليمن ودول الخليج وأوروبا",
+
+ logo:"logo-transparent.png",
+
+ whatsappMessage:
+ "السلام عليكم، أرغب بالاستفسار عن المنتجات المتوفرة.",
+
+ showWhatsapp:true
+
+};
+
+
+const defaultProducts = [
+
+ {
+  id:"sidr-royal",
+  name:"عسل السدر الملكي",
+  image:"sidr-royal.jpeg",
+  description:"عسل سدر يمني طبيعي فاخر مختار بعناية.",
+  weights:["500 جم","1 كجم","3 كجم","5 كجم","7 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"sumar",
+  name:"عسل السمر",
+  image:"sumar.jpeg",
+  description:"عسل سمر يمني طبيعي بجودة عالية.",
+  weights:["500 جم","1 كجم","3 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"sumar-comb",
+  name:"عسل سمر شبك",
+  image:"sumar-comb.jpeg",
+  description:"عسل سمر مع الشمع الطبيعي.",
+  weights:["500 جم","1 كجم","3 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"sidr-comb",
+  name:"عسل سدر شبك",
+  image:"sidr-comb.jpeg",
+  description:"عسل سدر يمني مع الشمع الطبيعي.",
+  weights:["500 جم","1 كجم","3 كجم","5 كجم","7 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"sourb",
+  name:"عسل الصورب",
+  image:"sourb.jpeg",
+  description:"عسل يمني طبيعي مختار بعناية.",
+  weights:["500 جم","1 كجم","3 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"farz",
+  name:"عسل فرز",
+  image:"farz.jpeg",
+  description:"عسل طبيعي بجودة مميزة.",
+  weights:["500 جم","1 كجم","3 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"dhabaya",
+  name:"عسل ضباية",
+  image:"dhabaya.jpeg",
+  description:"عسل يمني طبيعي فاخر.",
+  weights:["1 كجم","3 كجم","5 كجم","7 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"alsalam",
+  name:"عسل السلام",
+  image:"alsalam.jpeg",
+  description:"عسل طبيعي أصيل.",
+  weights:["500 جم","1 كجم","3 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"dhabaya-comb",
+  name:"ضباية شبك جامد",
+  image:"dhabaya-comb.jpeg",
+  description:"عسل طبيعي مع الشمع.",
+  weights:["1 كجم","3 كجم"],
+  category:"honey"
+ },
+
+ {
+  id:"bulk-honey",
+  name:"عسل عصيمي",
+  image:"bulk-honey.jpeg",
+  description:"عسل يمني طبيعي.",
+  weights:["5 كجم","7 كجم"],
+  category:"honey"
+ }
+
+];
+
+
+const defaultCategories = [
+
+ {
+  id:"honey",
+  title:"العسل اليمني",
+  description:"منتجات طبيعية 100%",
+  image:"honey-light.jpeg"
+ },
+
+ {
+  id:"coffee",
+  title:"البن اليمني",
+  description:"أجود أنواع البن",
+  image:"bulk.jpeg"
+ },
+
+ {
+  id:"oils",
+  title:"الزيوت الطبيعية",
+  description:"زيوت أصلية نقية",
+  image:"honey-pour.jpeg"
+ },
+
+ {
+  id:"offers",
+  title:"العروض والباقات",
+  description:"عروض مميزة",
+  image:"shop-logo.jpeg"
+ },
+
+ {
+  id:"accessories",
+  title:"الإكسسوارات",
+  description:"منتجات وإكسسوارات مختارة",
+  image:"honeycomb-card.jpeg"
+ }
+
+];
+
+
+/* ==================================================
+   مفاتيح التخزين
+================================================== */
+
+const STORE_SETTINGS_KEY =
+ "eliteStoreSettings";
+
+const PRODUCT_STORAGE_KEY =
+ "eliteProducts";
+
+const CATEGORY_STORAGE_KEY =
+ "eliteCategories";
+
+const BANNER_STORAGE_KEY =
+ "eliteBanner";
+
+const DEFAULT_BANNER =
+ "hero-reference.jpg";
+
+
+/* ==================================================
+   أسماء الأقسام
+================================================== */
+
+const categoryNames = {
+
+ honey:"العسل اليمني",
+
+ coffee:"البن اليمني",
+
+ oils:"الزيوت الطبيعية",
+
+ offers:"العروض والباقات",
+
+ accessories:"الإكسسوارات"
+
+};
+
+
+/* ==================================================
+   رسائل الإدارة
+================================================== */
+
+let adminMessageTimer;
+
+
+function showAdminMessage(message){
+
+ const box =
+  document.getElementById(
+   "adminMessage"
+  );
+
+
+ box.textContent =
+  message;
+
+
+ box.style.display =
+  "block";
+
+
+ clearTimeout(
+  adminMessageTimer
+ );
+
+
+ adminMessageTimer =
+  setTimeout(()=>{
+
+   box.style.display =
+    "none";
+
+  },2500);
+
+}
+
+
+/* ==================================================
+   أدوات الصور
+================================================== */
+
+function fileToDataURL(file){
+
+ return new Promise(
+  (resolve,reject)=>{
+
+   const reader =
+    new FileReader();
+
+
+   reader.onload =
+    ()=>resolve(
+     reader.result
+    );
+
+
+   reader.onerror =
+    ()=>reject(
+     reader.error
+    );
+
+
+   reader.readAsDataURL(
+    file
+   );
+
+  }
+ );
+
+}
+
+
+function getImageSource(image){
+
+ if(!image){
+  return "";
+ }
+
+
+ const value =
+  String(image);
+
+
+ if(
+  value.startsWith(
+   "data:image/"
+  )
+ ){
+  return value;
+ }
+
+
+ if(
+  value.startsWith("http://") ||
+  value.startsWith("https://") ||
+  value.startsWith("blob:")
+ ){
+  return value;
+ }
+
+
+ if(
+  value.startsWith("images/")
+ ){
+  return value;
+ }
+
+
+ return "images/" + value;
+
+}
+
+
+/* ==================================================
+   إعدادات المتجر
+================================================== */
+
+function getStoreSettings(){
+
+ try{
+
+  const saved =
+   JSON.parse(
+    localStorage.getItem(
+     STORE_SETTINGS_KEY
+    )
+   );
+
+
+  if(
+   saved &&
+   typeof saved === "object" &&
+   !Array.isArray(saved)
+  ){
+
+   return {
+
+    ...defaultStoreSettings,
+
+    ...saved
+
+   };
+
+  }
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+
+ const settings = {
+
+  ...defaultStoreSettings
+
+ };
+
+
+ localStorage.setItem(
+
+  STORE_SETTINGS_KEY,
+
+  JSON.stringify(
+   settings
+  )
+
+ );
+
+
+ return settings;
+
+}
+
+
+function saveStoreSettings(
+ settings
+){
+
+ localStorage.setItem(
+
+  STORE_SETTINGS_KEY,
+
+  JSON.stringify(
+   settings
+  )
+
+ );
+
+}
+
+
+/* ==================================================
+   عرض إعدادات المتجر
+================================================== */
+
+function renderStoreSettings(){
+
+ const settings =
+  getStoreSettings();
+
+
+ document
+  .getElementById(
+   "storeName"
+  )
+  .value =
+  settings.storeName || "";
+
+
+ document
+  .getElementById(
+   "storeWhatsapp"
+  )
+  .value =
+  settings.whatsapp || "";
+
+
+ document
+  .getElementById(
+   "storeShippingText"
+  )
+  .value =
+  settings.shippingText || "";
+
+
+ document
+  .getElementById(
+   "storeWhatsappMessage"
+  )
+  .value =
+  settings.whatsappMessage || "";
+
+
+ document
+  .getElementById(
+   "showWhatsapp"
+  )
+  .checked =
+  settings.showWhatsapp !== false;
+
+
+ const logoInput =
+  document.getElementById(
+   "storeLogo"
+  );
+
+
+ if(
+  String(
+   settings.logo || ""
+  )
+  .startsWith(
+   "data:image/"
+  )
+ ){
+
+  logoInput.value = "";
+
+ }else{
+
+  logoInput.value =
+   settings.logo || "";
+
+ }
+
+
+ document
+  .getElementById(
+   "storeLogoFile"
+  )
+  .value = "";
+
+
+ updateStorePreview(
+  settings
+ );
+
+}
+
+
+/* ==================================================
+   معاينة الإعدادات
+================================================== */
+
+function updateStorePreview(
+ settings=null
+){
+
+ const current =
+  settings || {
+
+   storeName:
+    document
+     .getElementById(
+      "storeName"
+     )
+     .value
+     .trim(),
+
+   whatsapp:
+    document
+     .getElementById(
+      "storeWhatsapp"
+     )
+     .value
+     .trim(),
+
+   shippingText:
+    document
+     .getElementById(
+      "storeShippingText"
+     )
+     .value
+     .trim(),
+
+   logo:
+    document
+     .getElementById(
+      "storeLogo"
+     )
+     .value
+     .trim()
+
+  };
+
+
+ document
+  .getElementById(
+   "previewStoreName"
+  )
+  .textContent =
+  current.storeName ||
+  "اسم المتجر";
+
+
+ document
+  .getElementById(
+   "previewShippingText"
+  )
+  .textContent =
+  current.shippingText ||
+  "نص التوصيل";
+
+
+ document
+  .getElementById(
+   "previewWhatsapp"
+  )
+  .textContent =
+  current.whatsapp ||
+  "غير محدد";
+
+
+ const preview =
+  document.getElementById(
+   "storeLogoPreview"
+  );
+
+
+ if(current.logo){
+
+  preview.innerHTML = `
+
+   <img
+    src="${getImageSource(current.logo)}"
+    alt="شعار المتجر">
+
+  `;
+
+ }else{
+
+  preview.innerHTML =
+   "معاينة الشعار";
+
+ }
+
+}
+
+
+/* تحديث المعاينة أثناء الكتابة */
+
+[
+ "storeName",
+ "storeWhatsapp",
+ "storeShippingText",
+ "storeLogo"
+]
+.forEach(id=>{
+
+ document
+  .getElementById(id)
+  .addEventListener(
+   "input",
+   ()=>updateStorePreview()
+  );
+
+});
+
+
+/* ==================================================
+   معاينة شعار من الجهاز
+================================================== */
+
+document
+.getElementById(
+ "storeLogoFile"
+)
+.addEventListener(
+ "change",
+ function(){
+
+  const file =
+   this.files[0];
+
+
+  if(!file){
+   return;
+  }
+
+
+  if(
+   !file.type.startsWith(
+    "image/"
+   )
+  ){
+
+   alert(
+    "اختر ملف صورة فقط."
+   );
+
+   this.value = "";
+
+   return;
+
+  }
+
+
+  const reader =
+   new FileReader();
+
+
+  reader.onload =
+   event=>{
+
+    document
+     .getElementById(
+      "storeLogoPreview"
+     )
+     .innerHTML = `
+
+      <img
+       src="${event.target.result}"
+       alt="معاينة الشعار">
+
+     `;
+
+   };
+
+
+  reader.readAsDataURL(
+   file
+  );
+
+ }
+);
+
+
+/* ==================================================
+   حفظ إعدادات المتجر
+================================================== */
+
+document
+.getElementById(
+ "saveStoreSettings"
+)
+.addEventListener(
+ "click",
+ async function(){
+
+  const storeName =
+   document
+    .getElementById(
+     "storeName"
+    )
+    .value
+    .trim();
+
+
+  let whatsapp =
+   document
+    .getElementById(
+     "storeWhatsapp"
+    )
+    .value
+    .trim();
+
+
+  const shippingText =
+   document
+    .getElementById(
+     "storeShippingText"
+    )
+    .value
+    .trim();
+
+
+  const whatsappMessage =
+   document
+    .getElementById(
+     "storeWhatsappMessage"
+    )
+    .value
+    .trim();
+
+
+  const showWhatsapp =
+   document
+    .getElementById(
+     "showWhatsapp"
+    )
+    .checked;
+
+
+  const logoName =
+   document
+    .getElementById(
+     "storeLogo"
+    )
+    .value
+    .trim();
+
+
+  const logoFile =
+   document
+    .getElementById(
+     "storeLogoFile"
+    )
+    .files[0];
+
+
+  if(!storeName){
+
+   alert(
+    "أدخل اسم المتجر."
+   );
+
+   return;
+
+  }
+
+
+  whatsapp =
+   whatsapp.replace(
+    /[^\d]/g,
+    ""
+   );
+
+
+  if(
+   showWhatsapp &&
+   !whatsapp
+  ){
+
+   alert(
+    "أدخل رقم واتساب أو أوقف خيار إظهار زر واتساب."
+   );
+
+   return;
+
+  }
+
+
+  const oldSettings =
+   getStoreSettings();
+
+
+  let finalLogo =
+   oldSettings.logo;
+
+
+  if(logoName){
+
+   finalLogo =
+    logoName;
+
+  }
+
+
+  if(logoFile){
+
+   try{
+
+    finalLogo =
+     await fileToDataURL(
+      logoFile
+     );
+
+   }catch(error){
+
+    alert(
+     "تعذر قراءة ملف الشعار."
+    );
+
+    return;
+
+   }
+
+  }
+
+
+  if(!finalLogo){
+
+   finalLogo =
+    defaultStoreSettings.logo;
+
+  }
+
+
+  const settings = {
+
+   storeName,
+
+   whatsapp,
+
+   shippingText,
+
+   logo:finalLogo,
+
+   whatsappMessage,
+
+   showWhatsapp
+
+  };
+
+
+  try{
+
+   saveStoreSettings(
+    settings
+   );
+
+  }catch(error){
+
+   alert(
+    "تعذر حفظ إعدادات المتجر. قد يكون ملف الشعار كبيرًا جدًا."
+   );
+
+   return;
+
+  }
+
+
+  renderStoreSettings();
+
+
+  showAdminMessage(
+   "تم حفظ إعدادات المتجر بنجاح ✓"
+  );
+
+ }
+);
+
+
+/* إلغاء */
+
+document
+.getElementById(
+ "cancelStoreSettings"
+)
+.addEventListener(
+ "click",
+ function(){
+
+  renderStoreSettings();
+
+  showAdminMessage(
+   "تم إلغاء التغييرات."
+  );
+
+ }
+);
+
+
+/* استعادة الإعدادات */
+
+document
+.getElementById(
+ "restoreStoreSettings"
+)
+.addEventListener(
+ "click",
+ function(){
+
+  if(
+   !confirm(
+    "هل تريد استعادة إعدادات المتجر الأساسية؟"
+   )
+  ){
+
+   return;
+
+  }
+
+
+  saveStoreSettings({
+
+   ...defaultStoreSettings
+
+  });
+
+
+  renderStoreSettings();
+
+
+  showAdminMessage(
+   "تمت استعادة إعدادات المتجر الأساسية."
+  );
+
+ }
+);
+
+
+/* ==================================================
+   البانر
+================================================== */
+
+function getBanner(){
+
+ const saved =
+  localStorage.getItem(
+   BANNER_STORAGE_KEY
+  );
+
+
+ if(saved){
+  return saved;
+ }
+
+
+ localStorage.setItem(
+  BANNER_STORAGE_KEY,
+  DEFAULT_BANNER
+ );
+
+
+ return DEFAULT_BANNER;
+
+}
+
+
+function saveBanner(image){
+
+ localStorage.setItem(
+  BANNER_STORAGE_KEY,
+  image
+ );
+
+}
+
+
+function renderBanner(){
+
+ const banner =
+  getBanner();
+
+
+ const preview =
+  document.getElementById(
+   "bannerPreview"
+  );
+
+
+ preview.innerHTML = `
+
+  <img
+   src="${getImageSource(banner)}"
+   alt="البانر الرئيسي">
+
+ `;
+
+
+ const imageInput =
+  document.getElementById(
+   "bannerImage"
+  );
+
+
+ if(
+  String(banner)
+   .startsWith(
+    "data:image/"
+   )
+ ){
+
+  imageInput.value = "";
+
+ }else{
+
+  imageInput.value =
+   banner;
+
+ }
+
+}
+
+
+/* معاينة اسم صورة البانر */
+
+document
+.getElementById(
+ "bannerImage"
+)
+.addEventListener(
+ "input",
+ function(){
+
+  const image =
+   this.value.trim();
+
+
+  const preview =
+   document.getElementById(
+    "bannerPreview"
+   );
+
+
+  if(!image){
+
+   preview.innerHTML =
+    "معاينة البانر";
+
+   return;
+
+  }
+
+
+  preview.innerHTML = `
+
+   <img
+    src="${getImageSource(image)}"
+    alt="معاينة البانر">
+
+  `;
+
+ }
+);
+
+
+/* صورة بانر من الجهاز */
+
+document
+.getElementById(
+ "bannerImageFile"
+)
+.addEventListener(
+ "change",
+ function(){
+
+  const file =
+   this.files[0];
+
+
+  if(!file){
+   return;
+  }
+
+
+  if(
+   !file.type.startsWith(
+    "image/"
+   )
+  ){
+
+   alert(
+    "اختر ملف صورة فقط."
+   );
+
+   this.value = "";
+
+   return;
+
+  }
+
+
+  const reader =
+   new FileReader();
+
+
+  reader.onload =
+   event=>{
+
+    document
+     .getElementById(
+      "bannerPreview"
+     )
+     .innerHTML = `
+
+      <img
+       src="${event.target.result}"
+       alt="معاينة البانر">
+
+     `;
+
+   };
+
+
+  reader.readAsDataURL(
+   file
+  );
+
+ }
+);
+
+
+/* حفظ البانر */
+
+document
+.getElementById(
+ "saveBanner"
+)
+.addEventListener(
+ "click",
+ async function(){
+
+  const imageName =
+   document
+    .getElementById(
+     "bannerImage"
+    )
+    .value
+    .trim();
+
+
+  const imageFile =
+   document
+    .getElementById(
+     "bannerImageFile"
+    )
+    .files[0];
+
+
+  let finalImage =
+   getBanner();
+
+
+  if(imageName){
+
+   finalImage =
+    imageName;
+
+  }
+
+
+  if(imageFile){
+
+   try{
+
+    finalImage =
+     await fileToDataURL(
+      imageFile
+     );
+
+   }catch(error){
+
+    alert(
+     "تعذر قراءة صورة البانر."
+    );
+
+    return;
+
+   }
+
+  }
+
+
+  try{
+
+   saveBanner(
+    finalImage
+   );
+
+  }catch(error){
+
+   alert(
+    "تعذر حفظ الصورة. قد تكون الصورة كبيرة جدًا."
+   );
+
+   return;
+
+  }
+
+
+  document
+   .getElementById(
+    "bannerImageFile"
+   )
+   .value = "";
+
+
+  renderBanner();
+
+
+  showAdminMessage(
+   "تم حفظ البانر الرئيسي بنجاح ✓"
+  );
+
+ }
+);
+
+
+/* إلغاء البانر */
+
+document
+.getElementById(
+ "cancelBanner"
+)
+.addEventListener(
+ "click",
+ function(){
+
+  document
+   .getElementById(
+    "bannerImageFile"
+   )
+   .value = "";
+
+
+  renderBanner();
+
+ }
+);
+
+
+/* استعادة البانر */
+
+document
+.getElementById(
+ "restoreBanner"
+)
+.addEventListener(
+ "click",
+ function(){
+
+  const confirmed =
+   confirm(
+    "هل تريد استعادة البانر الأساسي؟"
+   );
+
+
+  if(!confirmed){
+   return;
+  }
+
+
+  saveBanner(
+   DEFAULT_BANNER
+  );
+
+
+  document
+   .getElementById(
+    "bannerImageFile"
+   )
+   .value = "";
+
+
+  renderBanner();
+
+
+  showAdminMessage(
+   "تمت استعادة البانر الأساسي."
+  );
+
+ }
+);
+
+
+/* ==================================================
+   المنتجات
+================================================== */
+
+function getProducts(){
+
+ try{
+
+  const saved =
+   JSON.parse(
+    localStorage.getItem(
+     PRODUCT_STORAGE_KEY
+    )
+   );
+
+
+  if(Array.isArray(saved)){
+   return saved;
+  }
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+
+ const data =
+  JSON.parse(
+   JSON.stringify(
+    defaultProducts
+   )
+  );
+
+
+ localStorage.setItem(
+  PRODUCT_STORAGE_KEY,
+  JSON.stringify(data)
+ );
+
+
+ return data;
+
+}
+
+
+function saveProducts(products){
+
+ localStorage.setItem(
+
+  PRODUCT_STORAGE_KEY,
+
+  JSON.stringify(
+   products
+  )
+
+ );
+
+}
+
+
+function createId(){
+
+ return (
+
+  "product-" +
+
+  Date.now() +
+
+  "-" +
+
+  Math.random()
+   .toString(36)
+   .slice(2,7)
+
+ );
+
+}
+
+
+/* ==================================================
+   عرض المنتجات
+================================================== */
+
+function renderProducts(
+ filterText=""
+){
+
+ const products =
+  getProducts();
+
+
+ const list =
+  document.getElementById(
+   "productList"
+  );
+
+
+ const search =
+  filterText
+   .trim()
+   .toLowerCase();
+
+
+ list.innerHTML = "";
+
+
+ const filtered =
+  products.filter(
+   product=>{
+
+    return (
+
+     String(
+      product.name || ""
+     )
+     .toLowerCase()
+     .includes(search)
+
+     ||
+
+     String(
+      product.description || ""
+     )
+     .toLowerCase()
+     .includes(search)
+
+     ||
+
+     String(
+      categoryNames[
+       product.category
+      ] || ""
+     )
+     .toLowerCase()
+     .includes(search)
+
+    );
+
+   }
+  );
+
+
+ document
+  .getElementById(
+   "productCount"
+  )
+  .textContent =
+  products.length +
+  " منتج";
+
+
+ if(!filtered.length){
+
+  list.innerHTML =
+   '<div class="empty">لا توجد منتجات مطابقة.</div>';
+
+  return;
+
+ }
+
+
+ filtered.forEach(
+  product=>{
+
+   const card =
+    document.createElement(
+     "article"
+    );
+
+
+   card.className =
+    "product";
+
+
+   const weights =
+    Array.isArray(
+     product.weights
+    )
+     ? product.weights
+     : [];
+
+
+   card.innerHTML = `
+
+    <img
+     src="${getImageSource(product.image)}"
+     alt="${product.name || ""}">
+
+
+    <div>
+
+     <h3>
+      ${product.name || ""}
+     </h3>
+
+
+     <p>
+
+      ${
+       categoryNames[
+        product.category
+       ] ||
+       product.category ||
+       ""
+      }
+
+     </p>
+
+
+     <p>
+      ${product.description || ""}
+     </p>
+
+
+     <div class="badges">
+
+      ${
+       weights.map(
+        weight=>
+         `<span class="badge">${weight}</span>`
+       ).join("")
+      }
+
+     </div>
+
+
+     <div class="product-actions">
+
+      <button
+       type="button"
+       class="edit"
+       data-id="${product.id}">
+
+       تعديل
+
+      </button>
+
+
+      <button
+       type="button"
+       class="delete"
+       data-id="${product.id}">
+
+       حذف
+
+      </button>
+
+     </div>
+
+    </div>
+
+   `;
+
+
+   list.appendChild(
+    card
+   );
+
+  }
+ );
+
+}
+
+
+/* ==================================================
+   نموذج المنتج
+================================================== */
+
+function resetForm(){
+
+ document
+  .getElementById(
+   "productForm"
+  )
+  .reset();
+
+
+ document
+  .getElementById(
+   "editingId"
+  )
+  .value = "";
+
+
+ document
+  .getElementById(
+   "formTitle"
+  )
+  .textContent =
+  "إضافة منتج جديد";
+
+
+ document
+  .getElementById(
+   "imagePreview"
+  )
+  .innerHTML =
+  "معاينة الصورة";
+
+}
+
+
+/* معاينة اسم صورة المنتج */
+
+document
+.getElementById(
+ "image"
+)
+.addEventListener(
+ "input",
+ function(){
+
+  const image =
+   this.value.trim();
+
+
+  document
+   .getElementById(
+    "imagePreview"
+   )
+   .innerHTML =
+
+   image
+
+   ? `<img src="${getImageSource(image)}" alt="معاينة">`
+
+   : "معاينة الصورة";
+
+ }
+);
+
+
+/* صورة المنتج من الجهاز */
+
+document
+.getElementById(
+ "imageFile"
+)
+.addEventListener(
+ "change",
+ function(){
+
+  const file =
+   this.files[0];
+
+
+  if(!file){
+   return;
+  }
+
+
+  if(
+   !file.type.startsWith(
+    "image/"
+   )
+  ){
+
+   alert(
+    "اختر ملف صورة فقط."
+   );
+
+   this.value = "";
+
+   return;
+
+  }
+
+
+  const reader =
+   new FileReader();
+
+
+  reader.onload =
+   event=>{
+
+    document
+     .getElementById(
+      "imagePreview"
+     )
+     .innerHTML = `
+
+      <img
+       src="${event.target.result}"
+       alt="معاينة">
+
+     `;
+
+   };
+
+
+  reader.readAsDataURL(
+   file
+  );
+
+ }
+);
+
+
+/* ==================================================
+   حفظ المنتج
+================================================== */
+
+document
+.getElementById(
+ "productForm"
+)
+.addEventListener(
+ "submit",
+ async function(event){
+
+  event.preventDefault();
+
+
+  const editingId =
+   document
+    .getElementById(
+     "editingId"
+    )
+    .value;
+
+
+  const name =
+   document
+    .getElementById(
+     "name"
+    )
+    .value
+    .trim();
+
+
+  const category =
+   document
+    .getElementById(
+     "category"
+    )
+    .value;
+
+
+  const description =
+   document
+    .getElementById(
+     "description"
+    )
+    .value
+    .trim();
+
+
+  const imageName =
+   document
+    .getElementById(
+     "image"
+    )
+    .value
+    .trim();
+
+
+  const imageFile =
+   document
+    .getElementById(
+     "imageFile"
+    )
+    .files[0];
+
+
+  const weights =
+   document
+    .getElementById(
+     "weights"
+    )
+    .value
+    .split(",")
+    .map(
+     item=>item.trim()
+    )
+    .filter(Boolean);
+
+
+  if(
+   !name ||
+   !description ||
+   !weights.length
+  ){
+
+   alert(
+    "أكمل جميع بيانات المنتج."
+   );
+
+   return;
+
+  }
+
+
+  const products =
+   getProducts();
+
+
+  let finalImage =
+   imageName;
+
+
+  if(editingId){
+
+   const oldProduct =
+    products.find(
+     item=>
+      String(item.id) ===
+      String(editingId)
+    );
+
+
+   if(
+    oldProduct &&
+    !imageFile &&
+    !imageName
+   ){
+
+    finalImage =
+     oldProduct.image;
+
+   }
+
+  }
+
+
+  if(imageFile){
+
+   try{
+
+    finalImage =
+     await fileToDataURL(
+      imageFile
+     );
+
+   }catch(error){
+
+    alert(
+     "تعذر قراءة الصورة."
+    );
+
+    return;
+
+   }
+
+  }
+
+
+  if(!finalImage){
+
+   alert(
+    "اختر صورة للمنتج."
+   );
+
+   return;
+
+  }
+
+
+  if(editingId){
+
+   const index =
+    products.findIndex(
+     item=>
+      String(item.id) ===
+      String(editingId)
+    );
+
+
+   if(index !== -1){
+
+    products[index] = {
+
+     ...products[index],
+
+     name,
+
+     category,
+
+     description,
+
+     image:finalImage,
+
+     weights
+
+    };
+
+   }
+
+  }else{
+
+
+   products.push({
+
+    id:createId(),
+
+    name,
+
+    category,
+
+    description,
+
+    image:finalImage,
+
+    weights
+
+   });
+
+  }
+
+
+  try{
+
+   saveProducts(
+    products
+   );
+
+  }catch(error){
+
+   alert(
+    "تعذر الحفظ. قد تكون الصورة كبيرة جدًا."
+   );
+
+   return;
+
+  }
+
+
+  resetForm();
+
+
+  renderProducts(
+
+   document
+    .getElementById(
+     "search"
+    )
+    .value
+
+  );
+
+
+  showAdminMessage(
+
+   editingId
+
+   ? "تم تعديل المنتج بنجاح ✓"
+
+   : "تمت إضافة المنتج بنجاح ✓"
+
+  );
+
+ }
+);
+
+
+/* ==================================================
+   تعديل وحذف المنتجات
+================================================== */
+
+document
+.getElementById(
+ "productList"
+)
+.addEventListener(
+ "click",
+ function(event){
+
+  const editButton =
+   event.target.closest(
+    ".edit"
+   );
+
+
+  const deleteButton =
+   event.target.closest(
+    ".delete"
+   );
+
+
+  if(editButton){
+
+   const product =
+    getProducts()
+     .find(
+      item=>
+       String(item.id) ===
+       String(
+        editButton.dataset.id
+       )
+     );
+
+
+   if(!product){
+    return;
+   }
+
+
+   document
+    .getElementById(
+     "editingId"
+    )
+    .value =
+    product.id;
+
+
+   document
+    .getElementById(
+     "name"
+    )
+    .value =
+    product.name || "";
+
+
+   document
+    .getElementById(
+     "category"
+    )
+    .value =
+    product.category;
+
+
+   document
+    .getElementById(
+     "description"
+    )
+    .value =
+    product.description || "";
+
+
+   document
+    .getElementById(
+     "weights"
+    )
+    .value =
+
+    Array.isArray(
+     product.weights
+    )
+
+    ? product.weights.join(", ")
+
+    : "";
+
+
+   document
+    .getElementById(
+     "image"
+    )
+    .value =
+
+    String(
+     product.image || ""
+    )
+    .startsWith(
+     "data:image/"
+    )
+
+    ? ""
+
+    : product.image || "";
+
+
+   document
+    .getElementById(
+     "imageFile"
+    )
+    .value = "";
+
+
+   document
+    .getElementById(
+     "formTitle"
+    )
+    .textContent =
+    "تعديل المنتج";
+
+
+   document
+    .getElementById(
+     "imagePreview"
+    )
+    .innerHTML = `
+
+     <img
+      src="${getImageSource(product.image)}"
+      alt="معاينة">
+
+    `;
+
+
+   document
+    .getElementById(
+     "productForm"
+    )
+    .scrollIntoView({
+
+     behavior:"smooth",
+
+     block:"start"
+
+    });
+
+  }
+
+
+  if(deleteButton){
+
+   const id =
+    deleteButton.dataset.id;
+
+
+   const product =
+    getProducts()
+     .find(
+      item=>
+       String(item.id) ===
+       String(id)
+     );
+
+
+   if(!product){
+    return;
+   }
+
+
+   if(
+    !confirm(
+     'هل تريد حذف "' +
+     product.name +
+     '"؟'
+    )
+   ){
+
+    return;
+
+   }
+
+
+   saveProducts(
+
+    getProducts()
+     .filter(
+      item=>
+       String(item.id) !==
+       String(id)
+     )
+
+   );
+
+
+   renderProducts(
+
+    document
+     .getElementById(
+      "search"
+     )
+     .value
+
+   );
+
+
+   showAdminMessage(
+    "تم حذف المنتج."
+   );
+
+  }
+
+ }
+);
+
+
+/* البحث */
+
+document
+.getElementById(
+ "search"
+)
+.addEventListener(
+ "input",
+ function(){
+
+  renderProducts(
+   this.value
+  );
+
+ }
+);
+
+
+/* إلغاء تعديل المنتج */
+
+document
+.getElementById(
+ "cancelEdit"
+)
+.addEventListener(
+ "click",
+ resetForm
+);
+
+
+/* استعادة المنتجات */
+
+document
+.getElementById(
+ "restoreDefaults"
+)
+.addEventListener(
+ "click",
+ function(){
+
+  if(
+   !confirm(
+    "سيتم حذف تعديلات المنتجات واستعادة المنتجات الأساسية. هل أنت متأكد؟"
+   )
+  ){
+
+   return;
+
+  }
+
+
+  saveProducts(
+
+   JSON.parse(
+    JSON.stringify(
+     defaultProducts
+    )
+   )
+
+  );
+
+
+  resetForm();
+
+  renderProducts();
+
+
+  showAdminMessage(
+   "تمت استعادة المنتجات الأساسية."
+  );
+
+ }
+);
+
+
+/* ==================================================
+   الأقسام
+================================================== */
+
+function getCategories(){
+
+ try{
+
+  const saved =
+   JSON.parse(
+    localStorage.getItem(
+     CATEGORY_STORAGE_KEY
+    )
+   );
+
+
+  if(
+   Array.isArray(saved) &&
+   saved.length
+  ){
+
+   return saved;
+
+  }
+
+ }catch(error){
+
+  console.error(error);
+
+ }
+
+
+ const data =
+  JSON.parse(
+   JSON.stringify(
+    defaultCategories
+   )
+  );
+
+
+ localStorage.setItem(
+
+  CATEGORY_STORAGE_KEY,
+
+  JSON.stringify(
+   data
+  )
+
+ );
+
+
+ return data;
+
+}
+
+
+function saveCategories(
+ categories
+){
+
+ localStorage.setItem(
+
+  CATEGORY_STORAGE_KEY,
+
+  JSON.stringify(
+   categories
+  )
+
+ );
+
+}
+
+
+/* عرض الأقسام */
+
+function renderCategories(){
+
+ const container =
+  document.getElementById(
+   "categoriesList"
+  );
+
+
+ const categories =
+  getCategories();
+
+
+ container.innerHTML = "";
+
+
+ categories.forEach(
+  category=>{
+
+   const card =
+    document.createElement(
+     "div"
+    );
+
+
+   card.className =
+    "category-card";
+
+
+   card.innerHTML = `
+
+    <img
+     src="${getImageSource(category.image)}"
+     alt="${category.title || ""}">
+
+
+    <h3>
+     ${category.title || ""}
+    </h3>
+
+
+    <p>
+     ${category.description || ""}
+    </p>
+
+
+    <button
+     type="button"
+     class="category-edit"
+     data-category="${category.id}">
+
+     تعديل القسم
+
+    </button>
+
+   `;
+
+
+   container.appendChild(
+    card
+   );
+
+  }
+ );
+
+}
+
+
+/* فتح تعديل القسم */
+
+document
+.getElementById(
+ "categoriesList"
+)
+.addEventListener(
+ "click",
+ function(event){
+
+  const button =
+   event.target.closest(
+    ".category-edit"
+   );
+
+
+  if(!button){
+   return;
+  }
+
+
+  const category =
+   getCategories()
+    .find(
+     item=>
+      String(item.id) ===
+      String(
+       button.dataset.category
+      )
+    );
+
+
+  if(!category){
+   return;
+  }
+
+
+  document
+   .getElementById(
+    "categoryEditingId"
+   )
+   .value =
+   category.id;
+
+
+  document
+   .getElementById(
+    "categoryTitle"
+   )
+   .value =
+   category.title || "";
+
+
+  document
+   .getElementById(
+    "categoryDescription"
+   )
+   .value =
+   category.description || "";
+
+
+  document
+   .getElementById(
+    "categoryImage"
+   )
+   .value =
+
+   String(
+    category.image || ""
+   )
+   .startsWith(
+    "data:image/"
+   )
+
+   ? ""
+
+   : category.image || "";
+
+
+  document
+   .getElementById(
+    "categoryImageFile"
+   )
+   .value = "";
+
+
+  document
+   .getElementById(
+    "categoryPreview"
+   )
+   .innerHTML = `
+
+    <img
+     src="${getImageSource(category.image)}"
+     alt="معاينة">
+
+   `;
+
+
+  document
+   .getElementById(
+    "categoryEditorTitle"
+   )
+   .textContent =
+   "تعديل: " +
+   category.title;
+
+
+  document
+   .getElementById(
+    "categoryEditor"
+   )
+   .style.display =
+   "block";
+
+
+  document
+   .getElementById(
+    "categoryEditor"
+   )
+   .scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"center"
+
+   });
+
+ }
+);
+
+
+/* صورة القسم من الجهاز */
+
+document
+.getElementById(
+ "categoryImageFile"
+)
+.addEventListener(
+ "change",
+ function(){
+
+  const file =
+   this.files[0];
+
+
+  if(!file){
+   return;
+  }
+
+
+  if(
+   !file.type.startsWith(
+    "image/"
+   )
+  ){
+
+   alert(
+    "اختر ملف صورة فقط."
+   );
+
+   this.value = "";
+
+   return;
+
+  }
+
+
+  const reader =
+   new FileReader();
+
+
+  reader.onload =
+   event=>{
+
+    document
+     .getElementById(
+      "categoryPreview"
+     )
+     .innerHTML = `
+
+      <img
+       src="${event.target.result}"
+       alt="معاينة">
+
+     `;
+
+   };
+
+
+  reader.readAsDataURL(
+   file
+  );
+
+ }
+);
+
+
+/* اسم صورة القسم */
+
+document
+.getElementById(
+ "categoryImage"
+)
+.addEventListener(
+ "input",
+ function(){
+
+  const image =
+   this.value.trim();
+
+
+  document
+   .getElementById(
+    "categoryPreview"
+   )
+   .innerHTML =
+
+   image
+
+   ? `<img src="${getImageSource(image)}" alt="معاينة">`
+
+   : "معاينة صورة القسم";
+
+ }
+);
+
+
+/* حفظ القسم */
+
+document
+.getElementById(
+ "saveCategory"
+)
+.addEventListener(
+ "click",
+ async function(){
+
+  const id =
+   document
+    .getElementById(
+     "categoryEditingId"
+    )
+    .value;
+
+
+  const title =
+   document
+    .getElementById(
+     "categoryTitle"
+    )
+    .value
+    .trim();
+
+
+  const description =
+   document
+    .getElementById(
+     "categoryDescription"
+    )
+    .value
+    .trim();
+
+
+  const imageName =
+   document
+    .getElementById(
+     "categoryImage"
+    )
+    .value
+    .trim();
+
+
+  const imageFile =
+   document
+    .getElementById(
+     "categoryImageFile"
+    )
+    .files[0];
+
+
+  if(
+   !id ||
+   !title ||
+   !description
+  ){
+
+   alert(
+    "أكمل اسم القسم والوصف."
+   );
+
+   return;
+
+  }
+
+
+  const categories =
+   getCategories();
+
+
+  const index =
+   categories.findIndex(
+    item=>
+     String(item.id) ===
+     String(id)
+   );
+
+
+  if(index === -1){
+   return;
+  }
+
+
+  let finalImage =
+   categories[index].image;
+
+
+  if(imageName){
+
+   finalImage =
+    imageName;
+
+  }
+
+
+  if(imageFile){
+
+   try{
+
+    finalImage =
+     await fileToDataURL(
+      imageFile
+     );
+
+   }catch(error){
+
+    alert(
+     "تعذر قراءة الصورة."
+    );
+
+    return;
+
+   }
+
+  }
+
+
+  categories[index] = {
+
+   ...categories[index],
+
+   title,
+
+   description,
+
+   image:finalImage
+
+  };
+
+
+  try{
+
+   saveCategories(
+    categories
+   );
+
+  }catch(error){
+
+   alert(
+    "تعذر حفظ القسم. قد تكون الصورة كبيرة جدًا."
+   );
+
+   return;
+
+  }
+
+
+  closeCategoryEditor();
+
+  renderCategories();
+
+
+  showAdminMessage(
+   "تم تعديل القسم بنجاح ✓"
+  );
+
+ }
+);
+
+
+/* إغلاق محرر القسم */
+
+function closeCategoryEditor(){
+
+ document
+  .getElementById(
+   "categoryEditingId"
+  )
+  .value = "";
+
+
+ document
+  .getElementById(
+   "categoryTitle"
+  )
+  .value = "";
+
+
+ document
+  .getElementById(
+   "categoryDescription"
+  )
+  .value = "";
+
+
+ document
+  .getElementById(
+   "categoryImage"
+  )
+  .value = "";
+
+
+ document
+  .getElementById(
+   "categoryImageFile"
+  )
+  .value = "";
+
+
+ document
+  .getElementById(
+   "categoryPreview"
+  )
+  .innerHTML =
+  "معاينة صورة القسم";
+
+
+ document
+  .getElementById(
+   "categoryEditor"
+  )
+  .style.display =
+  "none";
+
+}
+
+
+document
+.getElementById(
+ "cancelCategory"
+)
+.addEventListener(
+ "click",
+ closeCategoryEditor
+);
+
+
+/* استعادة الأقسام */
+
+document
+.getElementById(
+ "restoreCategories"
+)
+.addEventListener(
+ "click",
+ function(){
+
+  if(
+   !confirm(
+    "هل تريد استعادة أسماء وصور وأوصاف الأقسام الأساسية؟"
+   )
+  ){
+
+   return;
+
+  }
+
+
+  saveCategories(
+
+   JSON.parse(
+    JSON.stringify(
+     defaultCategories
+    )
+   )
+
+  );
+
+
+  closeCategoryEditor();
+
+  renderCategories();
+
+
+  showAdminMessage(
+   "تمت استعادة الأقسام الأساسية."
+  );
+
+ }
+);
+
+
+/* ==================================================
+   تحديث أسماء الأقسام في قائمة المنتجات
+================================================== */
+
+function updateCategorySelect(){
+
+ const select =
+  document.getElementById(
+   "category"
+  );
+
+
+ const currentValue =
+  select.value;
+
+
+ const categories =
+  getCategories();
+
+
+ select.innerHTML = "";
+
+
+ categories.forEach(
+  category=>{
+
+   const option =
+    document.createElement(
+     "option"
+    );
+
+
+   option.value =
+    category.id;
+
+
+   option.textContent =
+    category.title;
+
+
+   select.appendChild(
+    option
+   );
+
+  }
+ );
+
+
+ if(
+  categories.some(
+   category=>
+    category.id ===
+    currentValue
+  )
+ ){
+
+  select.value =
+   currentValue;
+
+ }
+
+}
+
+
+/* ==================================================
+   التشغيل
+================================================== */
+
+getStoreSettings();
+
+getProducts();
+
+getCategories();
+
+getBanner();
+
+
+renderStoreSettings();
+
+renderBanner();
+
+renderCategories();
+
+updateCategorySelect();
+
+renderProducts();
+
+</script>
+
+</body>
+</html>

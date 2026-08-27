@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>تفاصيل المنتج - النخبة</title>
+
+<style>
+:root{
+ --green:#002b20;
+ --green2:#07392b;
+ --gold:#d4a34e;
+ --cream:#fffaf1;
+ --white:#ffffff;
+ --ink:#151c18;
+ --border:#dfc38e;
+ --red:#9b2525;
+}
+
+*{
+ box-sizing:border-box;
+}
+
+html{
+ scroll-behavior:smooth;
+}
+
+body{
+ margin:0;
+ background:var(--cream);
+ color:var(--ink);
+ font-family:Tahoma,Arial,sans-serif;
+}
+
+img{
+ max-width:100%;
+ display:block;
+}
+
+a{
+ text-decoration:none;
+}
+
+
+/* ==============================
+   أعلى الصفحة
+============================== */
+
+.top{
+ background:var(--green);
+ color:#fff;
+ border-bottom:1px solid var(--gold);
+}
+
+.top-inner{
+ width:min(1100px,94%);
+ min-height:44px;
+ margin:auto;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ font-size:13px;
+}
+
+.top a{
+ color:#fff;
+}
+
+.contact{
+ border:1px solid var(--gold);
+ padding:7px 11px;
+ border-radius:7px;
+}
+
+
+/* ==============================
+   الرأس
+============================== */
+
+header{
+ background:var(--green);
+ border-bottom:1px solid var(--gold);
+}
+
+.header-inner{
+ width:min(1100px,94%);
+ min-height:85px;
+ margin:auto;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+}
+
+.logo img{
+ width:120px;
+ height:75px;
+ object-fit:contain;
+}
+
+.header-links{
+ display:flex;
+ align-items:center;
+ gap:12px;
+}
+
+.header-link{
+ color:#fff;
+ border:1px solid rgba(212,163,78,.7);
+ border-radius:8px;
+ padding:9px 13px;
+ font-size:13px;
+}
+
+.header-link:hover{
+ color:#f0c36d;
+}
+
+
+/* ==============================
+   المحتوى
+============================== */
+
+.container{
+ width:min(1100px,94%);
+ margin:30px auto 60px;
+}
+
+.back{
+ display:inline-block;
+ margin-bottom:20px;
+ padding:10px 16px;
+ background:var(--green);
+ color:#fff;
+ border-radius:8px;
+}
+
+.back:hover{
+ background:var(--green2);
+}
+
+
+/* ==============================
+   تفاصيل المنتج
+============================== */
+
+.product{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+ gap:35px;
+ align-items:start;
+
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:18px;
+ padding:25px;
+}
+
+
+/* ==============================
+   الصورة
+============================== */
+
+.image-box{
+ position:relative;
+ overflow:hidden;
+ border:1px solid var(--border);
+ border-radius:15px;
+ background:#fffaf1;
+}
+
+.product-image{
+ width:100%;
+ aspect-ratio:1/1;
+ object-fit:contain;
+}
+
+
+/* ==============================
+   المفضلة
+============================== */
+
+.favorite{
+ position:absolute;
+ top:12px;
+ right:12px;
+
+ width:42px;
+ height:42px;
+
+ display:grid;
+ place-items:center;
+
+ border:1px solid var(--gold);
+ border-radius:50%;
+
+ background:var(--green);
+ color:#fff;
+
+ font-size:23px;
+ cursor:pointer;
+ z-index:5;
+}
+
+.favorite.liked{
+ background:var(--gold);
+ color:var(--green);
+}
+
+
+/* ==============================
+   معلومات المنتج
+============================== */
+
+.info{
+ padding:10px 0;
+}
+
+.category{
+ display:inline-block;
+ margin-bottom:12px;
+ padding:6px 10px;
+
+ border-radius:20px;
+
+ background:#f5ead4;
+ color:var(--green);
+
+ font-size:12px;
+}
+
+.info h1{
+ margin:0 0 15px;
+ color:var(--green);
+ font-size:30px;
+ line-height:1.4;
+}
+
+.description{
+ margin:0 0 25px;
+ color:#625b50;
+ font-size:15px;
+ line-height:2;
+}
+
+
+/* ==============================
+   الأوزان
+============================== */
+
+.weight-title{
+ margin-bottom:10px;
+ font-weight:bold;
+}
+
+.weights{
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
+}
+
+.weight{
+ padding:9px 14px;
+
+ border:1px solid #d7bd8d;
+ border-radius:20px;
+
+ background:#fffaf0;
+ color:var(--ink);
+
+ cursor:pointer;
+ font-family:inherit;
+}
+
+.weight:hover{
+ border-color:var(--green);
+}
+
+.weight.selected{
+ background:var(--gold);
+ border-color:var(--green);
+ color:var(--green);
+ font-weight:bold;
+}
+
+
+/* ==============================
+   الوزن المختار
+============================== */
+
+.selected-info{
+ min-height:25px;
+ margin-top:12px;
+ color:#655e52;
+ font-size:13px;
+}
+
+
+/* ==============================
+   الأزرار
+============================== */
+
+.actions{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ margin-top:20px;
+}
+
+.add-cart{
+ border:0;
+ border-radius:9px;
+ padding:14px;
+
+ background:var(--green);
+ color:#fff;
+
+ cursor:pointer;
+ font-family:inherit;
+ font-size:15px;
+ font-weight:bold;
+}
+
+.add-cart:hover{
+ background:var(--green2);
+}
+
+.whatsapp{
+ border:0;
+ border-radius:9px;
+ padding:14px;
+
+ background:#075e54;
+ color:#fff;
+
+ cursor:pointer;
+ font-family:inherit;
+ font-size:15px;
+ font-weight:bold;
+}
+
+.whatsapp:hover{
+ background:#064c44;
+}
+
+
+/* ==============================
+   رسالة النجاح
+============================== */
+
+.message{
+ display:none;
+ margin-top:15px;
+ padding:12px;
+
+ border:1px solid #b9d7c6;
+ border-radius:9px;
+
+ background:#edf8f1;
+ color:#185b37;
+
+ font-size:13px;
+}
+
+
+/* ==============================
+   المنتج غير موجود
+============================== */
+
+.not-found{
+ display:none;
+ padding:50px 20px;
+
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:15px;
+
+ text-align:center;
+}
+
+.not-found h2{
+ color:var(--green);
+}
+
+
+/* ==============================
+   المميزات
+============================== */
+
+.benefits{
+ margin-top:25px;
+ padding:18px;
+
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:10px;
+
+ background:var(--green);
+ color:#fff;
+
+ border-radius:16px;
+}
+
+.benefit{
+ padding:10px;
+ text-align:center;
+ font-size:12px;
+ line-height:1.7;
+}
+
+.benefit b{
+ display:block;
+ margin-bottom:5px;
+ color:#f0c36d;
+ font-size:13px;
+}
+
+
+/* ==============================
+   السلة العائمة
+============================== */
+
+.cart{
+ position:fixed;
+ left:20px;
+ bottom:20px;
+ z-index:100;
+
+ width:58px;
+ height:58px;
+
+ display:grid;
+ place-items:center;
+
+ border:1px solid var(--gold);
+ border-radius:50%;
+
+ background:var(--green2);
+ color:#fff;
+
+ font-size:24px;
+}
+
+.cart-count{
+ position:absolute;
+ top:-6px;
+ right:-5px;
+
+ min-width:22px;
+ height:22px;
+ padding:0 5px;
+
+ display:grid;
+ place-items:center;
+
+ border-radius:20px;
+
+ background:var(--gold);
+ color:var(--green);
+
+ font-size:11px;
+ font-weight:bold;
+}
+
+
+/* ==============================
+   الجوال
+============================== */
+
+@media(max-width:750px){
+
+ .top-inner{
+  justify-content:center;
+ }
+
+ .shipping{
+  display:none;
+ }
+
+ .header-inner{
+  min-height:75px;
+ }
+
+ .logo img{
+  width:95px;
+  height:65px;
+ }
+
+ .header-link{
+  padding:8px 10px;
+  font-size:11px;
+ }
+
+ .product{
+  grid-template-columns:1fr;
+  gap:18px;
+  padding:14px;
+ }
+
+ .info h1{
+  font-size:24px;
+ }
+
+ .description{
+  font-size:14px;
+ }
+
+ .benefits{
+  grid-template-columns:1fr 1fr;
+ }
+
+}
+
+
+@media(max-width:450px){
+
+ .container{
+  width:94%;
+  margin-top:20px;
+ }
+
+ .header-links .store-text{
+  display:none;
+ }
+
+ .actions{
+  grid-template-columns:1fr;
+ }
+
+ .benefits{
+  grid-template-columns:1fr 1fr;
+  padding:10px;
+ }
+
+ .benefit{
+  font-size:10px;
+ }
+
+ .cart{
+  width:50px;
+  height:50px;
+  left:14px;
+  bottom:14px;
+ }
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     أعلى الصفحة
+========================================== -->
+
+<div class="top">
+
+ <div class="top-inner">
+
+  <a
+   class="contact"
+   href="https://wa.me/967734800094">
+
+   ◉ تواصل معنا
+
+  </a>
+
+
+  <div class="shipping">
+
+   🚚 التوصيل إلى جميع اليمن ودول الخليج وأوروبا
+
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- ==========================================
+     الرأس
+========================================== -->
+
+<header>
+
+ <div class="header-inner">
+
+  <a
+   class="logo"
+   href="shop.html">
+
+   <img
+    src="images/logo-transparent.png"
+    alt="النخبة">
+
+  </a>
+
+
+  <div class="header-links">
+
+   <a
+    class="header-link"
+    href="shop.html">
+
+    <span class="store-text">
+     المتجر
+    </span>
+
+    🏠
+
+   </a>
+
+
+   <a
+    class="header-link"
+    href="cart.html">
+
+    السلة 🛒
+
+   </a>
+
+  </div>
+
+ </div>
+
+</header>
+
+
+<!-- ==========================================
+     المحتوى
+========================================== -->
+
+<main class="container">
+
+
+ <a
+  class="back"
+  href="shop.html">
+
+  ← العودة للمتجر
+
+ </a>
+
+
+ <!-- ========================================
+      تفاصيل المنتج
+ ======================================== -->
+
+ <section
+  class="product"
+  id="productDetails">
+
+
+  <!-- الصورة -->
+
+  <div class="image-box">
+
+   <button
+    type="button"
+    class="favorite"
+    id="favoriteButton"
+    aria-label="إضافة إلى المفضلة">
+
+    ♡
+
+   </button>
+
+
+   <img
+    class="product-image"
+    id="productImage"
+    src=""
+    alt="">
+
+  </div>
+
+
+  <!-- المعلومات -->
+
+  <div class="info">
+
+
+   <span
+    class="category"
+    id="productCategory">
+   </span>
+
+
+   <h1 id="productName">
+   </h1>
+
+
+   <p
+    class="description"
+    id="productDescription">
+   </p>
+
+
+   <div class="weight-title">
+
+    اختر الوزن:
+
+   </div>
+
+
+   <div
+    class="weights"
+    id="productWeights">
+   </div>
+
+
+   <div
+    class="selected-info"
+    id="selectedInfo">
+
+    لم يتم اختيار الوزن بعد.
+
+   </div>
+
+
+   <div class="actions">
+
+
+    <button
+     type="button"
+     class="add-cart"
+     id="addCart">
+
+     إضافة إلى السلة 🛒
+
+    </button>
+
+
+    <button
+     type="button"
+     class="whatsapp"
+     id="whatsapp">
+
+     استفسار عبر واتساب
+
+    </button>
+
+
+   </div>
+
+
+   <div
+    class="message"
+    id="successMessage">
+
+    تمت إضافة المنتج إلى السلة بنجاح ✓
+
+   </div>
+
+
+  </div>
+
+ </section>
+
+
+ <!-- ========================================
+      المنتج غير موجود
+ ======================================== -->
+
+ <section
+  class="not-found"
+  id="notFound">
+
+  <h2>
+   المنتج غير موجود
+  </h2>
+
+  <p>
+   ربما تم حذف المنتج أو تغيير بياناته.
+  </p>
+
+
+  <a
+   class="back"
+   href="shop.html">
+
+   العودة إلى المتجر
+
+  </a>
+
+ </section>
+
+
+ <!-- ========================================
+      المميزات
+ ======================================== -->
+
+ <section
+  class="benefits"
+  id="benefits">
+
+
+  <div class="benefit">
+
+   <b>
+    🌿 منتجات مختارة
+   </b>
+
+   جودة نهتم بها
+
+  </div>
+
+
+  <div class="benefit">
+
+   <b>
+    🚚 توصيل سريع وآمن
+   </b>
+
+   اليمن ودول الخليج وأوروبا
+
+  </div>
+
+
+  <div class="benefit">
+
+   <b>
+    📦 تغليف فاخر وآمن
+   </b>
+
+   للحفاظ على جودة المنتجات
+
+  </div>
+
+
+  <div class="benefit">
+
+   <b>
+    🎧 خدمة العملاء
+   </b>
+
+   للاستفسار وإتمام الطلب
+
+  </div>
+
+
+ </section>
+
+</main>
+
+
+<!-- ==========================================
+     السلة العائمة
+========================================== -->
+
+<a
+ class="cart"
+ href="cart.html"
+ aria-label="السلة">
+
+ 🛒
+
+ <span
+  class="cart-count"
+  id="cartCount">
+
+  0
+
+ </span>
+
+</a>
+
+
+<script>
+
+/* ==================================================
+   إعدادات المتجر
+================================================== */
+
+const PRODUCT_STORAGE_KEY =
+ "eliteProducts";
+
+const CATEGORY_STORAGE_KEY =
+ "eliteCategories";
+
+const WHATSAPP_NUMBER =
+ "967734800094";
+
+
+/* ==================================================
+   الأقسام الاحتياطية
+
+   تستخدم فقط إذا لم توجد بيانات الأقسام
+   في localStorage.
+================================================== */
+
+const defaultCategoryNames = {
+
+ honey:"العسل اليمني",
+
+ coffee:"البن اليمني",
+
+ oils:"الزيوت الطبيعية",
+
+ offers:"العروض والباقات",
+
+ accessories:"الإكسسوارات"
+
+};
+
+
+/* ==================================================
+   قراءة المنتجات
+================================================== */
+
+function getProducts(){
+
+ try{
+
+  const saved =
+   JSON.parse(
+    localStorage.getItem(
+     PRODUCT_STORAGE_KEY
+    )
+   );
+
+
+  if(Array.isArray(saved)){
+
+   return saved;
+
+  }
+
+ }catch(error){
+
+  console.error(
+   "تعذر قراءة المنتجات:",
+   error
+  );
+
+ }
+
+
+ return [];
+
+}
+
+
+/* ==================================================
+   قراءة الأقسام
+================================================== */
+
+function getCategories(){
+
+ try{
+
+  const saved =
+   JSON.parse(
+    localStorage.getItem(
+     CATEGORY_STORAGE_KEY
+    )
+   );
+
+
+  if(Array.isArray(saved)){
+
+   return saved;
+
+  }
+
+ }catch(error){
+
+  console.error(
+   "تعذر قراءة الأقسام:",
+   error
+  );
+
+ }
+
+
+ return [];
+
+}
+
+
+/* ==================================================
+   الحصول على اسم القسم
+
+   هذا يجعل اسم القسم يتحدث تلقائيًا
+   عند تعديله من admin.html
+================================================== */
+
+function getCategoryName(
+ categoryId
+){
+
+ const categories =
+  getCategories();
+
+
+ const category =
+  categories.find(
+   item =>
+
+    String(item.id) ===
+    String(categoryId)
+
+  );
+
+
+ if(category){
+
+  return (
+   category.title ||
+   categoryId ||
+   ""
+  );
+
+ }
+
+
+ return (
+
+  defaultCategoryNames[
+   categoryId
+  ]
+
+  ||
+
+  categoryId
+
+  ||
+
+  ""
+
+ );
+
+}
+
+
+/* ==================================================
+   معالجة الصور
+================================================== */
+
+function getImageSource(
+ image
+){
+
+ if(!image){
+
+  return "";
+
+ }
+
+
+ const value =
+  String(image);
+
+
+ /*
+ صورة تم رفعها من لوحة الإدارة
+ */
+
+ if(
+  value.startsWith(
+   "data:image/"
+  )
+ ){
+
+  return value;
+
+ }
+
+
+ /*
+ رابط خارجي كامل
+ */
+
+ if(
+  value.startsWith(
+   "http://"
+  )
+
+  ||
+
+  value.startsWith(
+   "https://"
+  )
+
+  ||
+
+  value.startsWith(
+   "blob:"
+  )
+ ){
+
+  return value;
+
+ }
+
+
+ /*
+ إذا كان المسار يحتوي images/
+ بالفعل فلا نضيفه مرة أخرى.
+ */
+
+ if(
+  value.startsWith(
+   "images/"
+  )
+ ){
+
+  return value;
+
+ }
+
+
+ /*
+ صورة موجودة داخل مجلد images
+ */
+
+ return "images/" + value;
+
+}
+
+
+/* ==================================================
+   قراءة ID المنتج من الرابط
+
+   مثال:
+
+   product.html?id=sidr-royal
+================================================== */
+
+function getProductId(){
+
+ const params =
+  new URLSearchParams(
+   window.location.search
+  );
+
+
+ return params.get(
+  "id"
+ );
+
+}
+
+
+/* ==================================================
+   تحديد المنتج الحالي
+================================================== */
+
+const productId =
+ getProductId();
+
+
+const products =
+ getProducts();
+
+
+const product =
+ products.find(
+  item =>
+
+   String(item.id) ===
+   String(productId)
+
+ );
+
+
+let selectedWeight =
+ "";
+
+
+/* ==================================================
+   عرض المنتج
+================================================== */
+
+function showProduct(){
+
+ /*
+ في حالة عدم وجود المنتج
+ */
+
+ if(!product){
+
+  document
+   .getElementById(
+    "productDetails"
+   )
+   .style.display =
+   "none";
+
+
+  document
+   .getElementById(
+    "benefits"
+   )
+   .style.display =
+   "none";
+
+
+  document
+   .getElementById(
+    "notFound"
+   )
+   .style.display =
+   "block";
+
+
+  document.title =
+   "المنتج غير موجود - النخبة";
+
+
+  return;
+
+ }
+
+
+ /*
+ عنوان الصفحة
+ */
+
+ document.title =
+  (product.name || "المنتج") +
+  " - النخبة";
+
+
+ /*
+ اسم المنتج
+ */
+
+ document
+  .getElementById(
+   "productName"
+  )
+  .textContent =
+  product.name || "";
+
+
+ /*
+ وصف المنتج
+ */
+
+ document
+  .getElementById(
+   "productDescription"
+  )
+  .textContent =
+  product.description || "";
+
+
+ /*
+ القسم
+
+ يتم الآن قراءته من eliteCategories
+ وليس من قائمة ثابتة فقط.
+ */
+
+ document
+  .getElementById(
+   "productCategory"
+  )
+  .textContent =
+  getCategoryName(
+   product.category
+  );
+
+
+ /*
+ صورة المنتج
+ */
+
+ const image =
+  document.getElementById(
+   "productImage"
+  );
+
+
+ image.src =
+  getImageSource(
+   product.image
+  );
+
+
+ image.alt =
+  product.name || "صورة المنتج";
+
+
+ /*
+ في حالة تعذر تحميل الصورة
+ */
+
+ image.onerror =
+  function(){
+
+   this.alt =
+    "تعذر تحميل صورة المنتج";
+
+  };
+
+
+ /*
+ عرض الأوزان
+ */
+
+ showWeights();
+
+
+ /*
+ تحديث المفضلة
+ */
+
+ updateFavorite();
+
+}
+
+
+/* ==================================================
+   عرض الأوزان
+================================================== */
+
+function showWeights(){
+
+ const container =
+  document.getElementById(
+   "productWeights"
+  );
+
+
+ container.innerHTML =
+  "";
+
+
+ const weights =
+  Array.isArray(
+   product.weights
+  )
+
+  ? product.weights
+
+  : [];
+
+
+ /*
+ لا توجد أوزان
+ */
+
+ if(
+  weights.length === 0
+ ){
+
+  container.innerHTML =
+   "<span>لا توجد أوزان متاحة.</span>";
+
+
+  document
+   .getElementById(
+    "selectedInfo"
+   )
+   .textContent =
+   "لا توجد خيارات متاحة لهذا المنتج.";
+
+
+  return;
+
+ }
+
+
+ /*
+ إنشاء أزرار الأوزان
+ */
+
+ weights.forEach(
+  weight=>{
+
+   const button =
+    document.createElement(
+     "button"
+    );
+
+
+   button.type =
+    "button";
+
+
+   button.className =
+    "weight";
+
+
+   button.textContent =
+    weight;
+
+
+   button.addEventListener(
+    "click",
+    function(){
+
+
+     /*
+     إزالة الاختيار السابق
+     */
+
+     container
+      .querySelectorAll(
+       ".weight"
+      )
+      .forEach(
+       btn=>{
+
+        btn.classList.remove(
+         "selected"
+        );
+
+       }
+      );
+
+
+     /*
+     اختيار الوزن الحالي
+     */
+
+     this.classList.add(
+      "selected"
+     );
+
+
+     selectedWeight =
+      weight;
+
+
+     /*
+     عرض الوزن المختار
+     */
+
+     document
+      .getElementById(
+       "selectedInfo"
+      )
+      .textContent =
+
+      "الوزن المختار: " +
+      weight;
+
+    }
+   );
+
+
+   container.appendChild(
+    button
+   );
+
+  }
+ );
+
+}
+
+
+/* ==================================================
+   قراءة السلة
+================================================== */
+
+function getCart(){
+
+ try{
+
+  const cart =
+   JSON.parse(
+    localStorage.getItem(
+     "cart"
+    )
+   ) || [];
+
+
+  return Array.isArray(cart)
+   ? cart
+   : [];
+
+ }catch(error){
+
+  console.error(
+   "تعذر قراءة السلة:",
+   error
+  );
+
+
+  return [];
+
+ }
+
+}
+
+
+/* ==================================================
+   حفظ السلة
+================================================== */
+
+function saveCart(
+ cart
+){
+
+ localStorage.setItem(
+  "cart",
+  JSON.stringify(cart)
+ );
+
+}
+
+
+/* ==================================================
+   إضافة المنتج إلى السلة
+================================================== */
+
+function addProductToCart(){
+
+ if(!product){
+
+  return;
+
+ }
+
+
+ /*
+ يجب اختيار الوزن أولاً
+ */
+
+ if(!selectedWeight){
+
+  alert(
+   "اختر الوزن أولاً."
+  );
+
+
+  return;
+
+ }
+
+
+ const cart =
+  getCart();
+
+
+ /*
+ البحث عن نفس المنتج
+ ونفس الوزن
+ */
+
+ const existing =
+  cart.find(
+   item =>
+
+    String(item.id) ===
+    String(product.id)
+
+    &&
+
+    String(item.weight) ===
+    String(selectedWeight)
+
+  );
+
+
+ /*
+ إذا كان موجودًا نزيد الكمية
+ */
+
+ if(existing){
+
+  existing.quantity =
+   Number(
+    existing.quantity || 1
+   ) + 1;
+
+ }
+
+ /*
+ وإلا نضيف عنصرًا جديدًا
+ */
+
+ else{
+
+  cart.push({
+
+   id:
+    product.id,
+
+   name:
+    product.name,
+
+   image:
+    getImageSource(
+     product.image
+    ),
+
+   weight:
+    selectedWeight,
+
+   quantity:
+    1,
+
+   category:
+    product.category
+
+  });
+
+ }
+
+
+ /*
+ حفظ السلة
+ */
+
+ try{
+
+  saveCart(
+   cart
+  );
+
+ }catch(error){
+
+  console.error(
+   error
+  );
+
+
+  alert(
+   "تعذر إضافة المنتج إلى السلة."
+  );
+
+
+  return;
+
+ }
+
+
+ /*
+ تحديث العداد
+ */
+
+ updateCartCount();
+
+
+ /*
+ رسالة النجاح
+ */
+
+ const message =
+  document.getElementById(
+   "successMessage"
+  );
+
+
+ message.style.display =
+  "block";
+
+
+ /*
+ منع تداخل المؤقتات
+ إذا ضغط العميل أكثر من مرة.
+ */
+
+ clearTimeout(
+  window.productSuccessTimer
+ );
+
+
+ window.productSuccessTimer =
+  setTimeout(
+   ()=>{
+
+    message.style.display =
+     "none";
+
+   },
+
+   2500
+
+  );
+
+}
+
+
+/* ==================================================
+   تحديث عداد السلة
+================================================== */
+
+function updateCartCount(){
+
+ const cart =
+  getCart();
+
+
+ const total =
+  cart.reduce(
+
+   (sum,item)=>
+
+    sum +
+    Number(
+     item.quantity || 1
+    ),
+
+   0
+
+  );
+
+
+ document
+  .getElementById(
+   "cartCount"
+  )
+  .textContent =
+  total;
+
+}
+
+
+/* ==================================================
+   قراءة المفضلة
+================================================== */
+
+function getFavorites(){
+
+ try{
+
+  const favorites =
+   JSON.parse(
+    localStorage.getItem(
+     "favorites"
+    )
+   ) || [];
+
+
+  return Array.isArray(
+   favorites
+  )
+
+  ? favorites
+
+  : [];
+
+ }catch(error){
+
+  console.error(
+   "تعذر قراءة المفضلة:",
+   error
+  );
+
+
+  return [];
+
+ }
+
+}
+
+
+/* ==================================================
+   حفظ المفضلة
+================================================== */
+
+function saveFavorites(
+ favorites
+){
+
+ localStorage.setItem(
+  "favorites",
+  JSON.stringify(
+   favorites
+  )
+ );
+
+}
+
+
+/* ==================================================
+   التحقق من وجود المنتج في المفضلة
+================================================== */
+
+function isFavorite(
+ favorites,
+ id
+){
+
+ return favorites.some(
+  favoriteId =>
+
+   String(favoriteId) ===
+   String(id)
+
+ );
+
+}
+
+
+/* ==================================================
+   تحديث زر المفضلة
+================================================== */
+
+function updateFavorite(){
+
+ if(!product){
+
+  return;
+
+ }
+
+
+ const favorites =
+  getFavorites();
+
+
+ const button =
+  document.getElementById(
+   "favoriteButton"
+  );
+
+
+ const liked =
+  isFavorite(
+   favorites,
+   product.id
+  );
+
+
+ button.classList.toggle(
+  "liked",
+  liked
+ );
+
+
+ button.textContent =
+  liked
+   ? "♥️"
+   : "♡";
+
+
+ button.setAttribute(
+  "aria-label",
+
+  liked
+   ? "إزالة من المفضلة"
+   : "إضافة إلى المفضلة"
+ );
+
+}
+
+
+/* ==================================================
+   إضافة / إزالة المفضلة
+================================================== */
+
+function toggleFavorite(){
+
+ if(!product){
+
+  return;
+
+ }
+
+
+ let favorites =
+  getFavorites();
+
+
+ /*
+ إذا كان موجودًا نحذفه
+ */
+
+ if(
+  isFavorite(
+   favorites,
+   product.id
+  )
+ ){
+
+  favorites =
+   favorites.filter(
+    id =>
+
+     String(id) !==
+     String(product.id)
+
+   );
+
+ }
+
+ /*
+ وإلا نضيفه
+ */
+
+ else{
+
+  favorites.push(
+   product.id
+  );
+
+ }
+
+
+ saveFavorites(
+  favorites
+ );
+
+
+ updateFavorite();
+
+}
+
+
+/* ==================================================
+   الاستفسار عبر واتساب
+================================================== */
+
+function openWhatsApp(){
+
+ if(!product){
+
+  return;
+
+ }
+
+
+ let message =
+
+  "السلام عليكم، أرغب بالاستفسار عن المنتج التالي:\n\n";
+
+
+ /*
+ اسم المنتج
+ */
+
+ message +=
+
+  "المنتج: " +
+  (product.name || "") +
+  "\n";
+
+
+ /*
+ القسم
+ */
+
+ message +=
+
+  "القسم: " +
+  getCategoryName(
+   product.category
+  ) +
+  "\n";
+
+
+ /*
+ الوزن إذا تم اختياره
+ */
+
+ if(selectedWeight){
+
+  message +=
+
+   "الوزن: " +
+   selectedWeight +
+   "\n";
+
+ }
+
+
+ message +=
+
+  "\nأرجو إفادتي بالسعر والتوصيل.";
+
+
+ /*
+ إنشاء رابط واتساب
+ */
+
+ const url =
+
+  "https://wa.me/" +
+  WHATSAPP_NUMBER +
+  "?text=" +
+  encodeURIComponent(
+   message
+  );
+
+
+ /*
+ فتح واتساب
+ */
+
+ window.location.href =
+  url;
+
+}
+
+
+/* ==================================================
+   زر إضافة للسلة
+================================================== */
+
+document
+ .getElementById(
+  "addCart"
+ )
+ .addEventListener(
+  "click",
+  addProductToCart
+ );
+
+
+/* ==================================================
+   زر المفضلة
+================================================== */
+
+document
+ .getElementById(
+  "favoriteButton"
+ )
+ .addEventListener(
+  "click",
+  toggleFavorite
+ );
+
+
+/* ==================================================
+   زر واتساب
+================================================== */
+
+document
+ .getElementById(
+  "whatsapp"
+ )
+ .addEventListener(
+  "click",
+  openWhatsApp
+ );
+
+
+/* ==================================================
+   مزامنة السلة والمفضلة
+
+   مفيد إذا كان المتجر مفتوحًا
+   في أكثر من تبويب.
+================================================== */
+
+window.addEventListener(
+ "storage",
+ event=>{
+
+  if(
+   event.key === "cart"
+  ){
+
+   updateCartCount();
+
+  }
+
+
+  if(
+   event.key === "favorites"
+  ){
+
+   updateFavorite();
+
+  }
+
+ }
+);
+
+
+/* ==================================================
+   تحديث الصفحة عند الرجوع إليها
+
+   مفيد خصوصًا على الجوال عندما يرجع
+   المستخدم من cart.html إلى product.html.
+================================================== */
+
+window.addEventListener(
+ "pageshow",
+ ()=>{
+
+  updateCartCount();
+
+  updateFavorite();
+
+ }
+);
+
+
+/* ==================================================
+   التشغيل
+================================================== */
+
+showProduct();
+
+updateCartCount();
+
+</script>
+
+
+</body>
+</html>

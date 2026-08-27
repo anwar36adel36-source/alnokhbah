@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>سلة التسوق - النخبة</title>
+
+<style>
+:root{
+ --green:#002b20;
+ --green2:#07392b;
+ --gold:#d4a34e;
+ --cream:#fffaf1;
+ --white:#ffffff;
+ --red:#8b1e1e;
+ --ink:#151c18;
+ --border:#d6b474;
+ --muted:#6b6459;
+}
+
+*{
+ box-sizing:border-box;
+}
+
+html{
+ scroll-behavior:smooth;
+}
+
+body{
+ margin:0;
+ background:var(--cream);
+ color:var(--ink);
+ font-family:Tahoma,Arial,sans-serif;
+}
+
+img{
+ max-width:100%;
+ display:block;
+}
+
+a{
+ text-decoration:none;
+}
+
+button,
+input,
+select,
+textarea{
+ font-family:inherit;
+}
+
+
+/* =====================================
+   أعلى الصفحة
+===================================== */
+
+.top{
+ background:var(--green);
+ color:#fff;
+ border-bottom:1px solid var(--gold);
+}
+
+.top-inner{
+ width:min(1050px,94%);
+ min-height:44px;
+ margin:auto;
+
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+
+ font-size:13px;
+}
+
+.top a{
+ color:#fff;
+}
+
+.contact{
+ border:1px solid var(--gold);
+ padding:7px 11px;
+ border-radius:7px;
+}
+
+
+/* =====================================
+   الرأس
+===================================== */
+
+header{
+ background:var(--green);
+ color:#fff;
+ border-bottom:1px solid var(--gold);
+}
+
+.header-inner{
+ width:min(1050px,94%);
+ min-height:90px;
+ margin:auto;
+
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+}
+
+.logo img{
+ width:120px;
+ height:75px;
+ object-fit:contain;
+}
+
+.header-title{
+ text-align:left;
+}
+
+.header-title h1{
+ margin:0;
+ color:#f0c36d;
+ font-size:25px;
+}
+
+.header-title p{
+ margin:7px 0 0;
+ font-size:12px;
+}
+
+
+/* =====================================
+   المحتوى
+===================================== */
+
+.container{
+ width:min(1050px,94%);
+ margin:25px auto 60px;
+}
+
+.back{
+ display:inline-block;
+ margin-bottom:20px;
+ padding:10px 17px;
+
+ border-radius:8px;
+
+ background:var(--green);
+ color:#fff;
+}
+
+.back:hover{
+ background:var(--green2);
+}
+
+
+/* =====================================
+   تخطيط الصفحة
+===================================== */
+
+.checkout-layout{
+ display:grid;
+ grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);
+ gap:20px;
+ align-items:start;
+}
+
+
+/* =====================================
+   الصناديق
+===================================== */
+
+.panel{
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:15px;
+ padding:18px;
+}
+
+.panel-title{
+ margin:0 0 18px;
+ color:var(--green);
+ font-size:21px;
+}
+
+
+/* =====================================
+   منتجات السلة
+===================================== */
+
+.cart-item{
+ display:flex;
+ align-items:center;
+ gap:16px;
+
+ padding:14px;
+ margin-bottom:12px;
+
+ background:#fffdf8;
+ border:1px solid #e3cca1;
+ border-radius:13px;
+}
+
+.cart-item:last-child{
+ margin-bottom:0;
+}
+
+.cart-item img{
+ width:105px;
+ height:105px;
+ object-fit:cover;
+
+ border-radius:10px;
+ background:#eee;
+}
+
+.info{
+ flex:1;
+ min-width:0;
+}
+
+.info h3{
+ margin:0 0 8px;
+ color:var(--green);
+ font-size:16px;
+}
+
+.info p{
+ margin:5px 0;
+ color:var(--muted);
+ font-size:13px;
+}
+
+
+/* =====================================
+   الكمية
+===================================== */
+
+.quantity{
+ display:flex;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-top:10px;
+}
+
+.quantity button{
+ width:32px;
+ height:32px;
+
+ display:grid;
+ place-items:center;
+
+ border:1px solid var(--border);
+ border-radius:7px;
+
+ background:#fffaf1;
+ color:var(--green);
+
+ cursor:pointer;
+ font-size:18px;
+}
+
+.quantity button:hover{
+ background:#f5ead4;
+}
+
+.quantity strong{
+ min-width:28px;
+ text-align:center;
+}
+
+
+/* =====================================
+   حذف المنتج
+===================================== */
+
+.remove{
+ border:0;
+ border-radius:7px;
+ padding:9px 12px;
+
+ background:var(--red);
+ color:#fff;
+
+ cursor:pointer;
+}
+
+.remove:hover{
+ opacity:.9;
+}
+
+
+/* =====================================
+   السلة الفارغة
+===================================== */
+
+.empty{
+ padding:55px 20px;
+ text-align:center;
+
+ background:#fff;
+ border:1px solid var(--border);
+ border-radius:14px;
+}
+
+.empty-icon{
+ font-size:50px;
+}
+
+.empty h2{
+ color:var(--green);
+}
+
+.empty p{
+ color:var(--muted);
+ line-height:1.8;
+}
+
+.empty a{
+ display:inline-block;
+ margin-top:10px;
+ padding:11px 20px;
+
+ background:var(--green);
+ color:#fff;
+
+ border-radius:8px;
+}
+
+
+/* =====================================
+   نموذج العميل
+===================================== */
+
+.customer-form label{
+ display:block;
+ margin:13px 0 6px;
+
+ color:var(--green);
+ font-size:13px;
+ font-weight:bold;
+}
+
+.required{
+ color:var(--red);
+}
+
+.customer-form input,
+.customer-form select,
+.customer-form textarea{
+ width:100%;
+ padding:11px 12px;
+
+ border:1px solid #d7bd8d;
+ border-radius:8px;
+
+ background:#fffdf8;
+ color:var(--ink);
+
+ font-size:14px;
+ outline:none;
+}
+
+.customer-form input:focus,
+.customer-form select:focus,
+.customer-form textarea:focus{
+ border-color:var(--green);
+}
+
+.customer-form textarea{
+ min-height:85px;
+ resize:vertical;
+}
+
+.form-row{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.help{
+ display:block;
+ margin-top:5px;
+
+ color:#817768;
+ font-size:10px;
+ line-height:1.6;
+}
+
+
+/* =====================================
+   ملخص الطلب
+===================================== */
+
+.summary{
+ margin-top:18px;
+ padding-top:17px;
+ border-top:1px solid #eee0c6;
+}
+
+.summary-row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+
+ margin-bottom:10px;
+ font-size:14px;
+}
+
+.summary-row strong{
+ color:var(--green);
+}
+
+
+/* =====================================
+   ملاحظة
+===================================== */
+
+.note{
+ margin-top:14px;
+ padding:11px;
+
+ border:1px solid #ead6a9;
+ border-radius:8px;
+
+ background:#fff8e8;
+
+ color:#675d4e;
+ font-size:11px;
+ line-height:1.8;
+}
+
+
+/* =====================================
+   أزرار الطلب
+===================================== */
+
+.actions{
+ display:grid;
+ grid-template-columns:1fr;
+ gap:9px;
+ margin-top:16px;
+}
+
+.whatsapp{
+ padding:14px;
+
+ border:0;
+ border-radius:9px;
+
+ background:#075e54;
+ color:#fff;
+
+ cursor:pointer;
+
+ font-size:15px;
+ font-weight:bold;
+}
+
+.whatsapp:hover{
+ background:#064c44;
+}
+
+.clear{
+ padding:11px;
+
+ border:1px solid var(--red);
+ border-radius:8px;
+
+ background:#fff;
+ color:var(--red);
+
+ cursor:pointer;
+}
+
+
+/* =====================================
+   رسالة الخطأ
+===================================== */
+
+.form-message{
+ display:none;
+ margin-top:12px;
+ padding:11px;
+
+ border:1px solid #e3b3b3;
+ border-radius:8px;
+
+ background:#fff1f1;
+ color:#8b1e1e;
+
+ font-size:12px;
+ line-height:1.7;
+}
+
+
+/* =====================================
+   المميزات
+===================================== */
+
+.benefits{
+ width:min(1050px,94%);
+ margin:0 auto 35px;
+ padding:18px;
+
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+
+ background:var(--green);
+ color:#fff;
+
+ border-radius:16px;
+}
+
+.benefit{
+ padding:10px;
+ text-align:center;
+ font-size:11px;
+ line-height:1.7;
+}
+
+.benefit b{
+ display:block;
+ margin-bottom:5px;
+ color:#f0c36d;
+ font-size:13px;
+}
+
+
+/* =====================================
+   الجوال
+===================================== */
+
+@media(max-width:800px){
+
+ .checkout-layout{
+  grid-template-columns:1fr;
+ }
+
+ .customer-panel{
+  order:2;
+ }
+
+ .cart-panel{
+  order:1;
+ }
+
+ .benefits{
+  grid-template-columns:1fr 1fr;
+ }
+
+}
+
+
+@media(max-width:600px){
+
+ .top-inner{
+  justify-content:center;
+ }
+
+ .shipping{
+  display:none;
+ }
+
+ .header-inner{
+  min-height:75px;
+ }
+
+ .logo img{
+  width:95px;
+  height:65px;
+ }
+
+ .header-title h1{
+  font-size:19px;
+ }
+
+ .header-title p{
+  display:none;
+ }
+
+ .container{
+  width:94%;
+  margin-top:18px;
+ }
+
+ .panel{
+  padding:12px;
+ }
+
+ .cart-item{
+  align-items:flex-start;
+  gap:10px;
+  padding:10px;
+ }
+
+ .cart-item img{
+  width:82px;
+  height:82px;
+ }
+
+ .info h3{
+  font-size:14px;
+ }
+
+ .info p{
+  font-size:11px;
+ }
+
+ .remove{
+  padding:7px 8px;
+  font-size:10px;
+ }
+
+ .form-row{
+  grid-template-columns:1fr;
+  gap:0;
+ }
+
+}
+
+
+@media(max-width:420px){
+
+ .benefits{
+  padding:10px;
+ }
+
+ .benefit{
+  padding:7px 4px;
+  font-size:9px;
+ }
+
+ .benefit b{
+  font-size:11px;
+ }
+
+ .quantity span{
+  font-size:11px;
+ }
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     أعلى الصفحة
+===================================== -->
+
+<div class="top">
+
+ <div class="top-inner">
+
+  <a
+   class="contact"
+   href="https://wa.me/967734800094">
+
+   ◉ تواصل معنا
+
+  </a>
+
+  <div class="shipping">
+
+   🚚 التوصيل إلى جميع اليمن ودول الخليج وأوروبا
+
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- =====================================
+     الرأس
+===================================== -->
+
+<header>
+
+ <div class="header-inner">
+
+  <a
+   class="logo"
+   href="shop.html">
+
+   <img
+    src="images/logo-transparent.png"
+    alt="النخبة">
+
+  </a>
+
+
+  <div class="header-title">
+
+   <h1>
+    🛒 سلة التسوق
+   </h1>
+
+   <p>
+    راجع طلبك وأدخل بيانات التوصيل
+   </p>
+
+  </div>
+
+ </div>
+
+</header>
+
+
+<!-- =====================================
+     المحتوى
+===================================== -->
+
+<main class="container">
+
+ <a
+  class="back"
+  href="shop.html">
+
+  ← متابعة التسوق
+
+ </a>
+
+
+ <div
+  class="checkout-layout"
+  id="checkoutLayout">
+
+
+  <!-- =================================
+       المنتجات
+  ================================== -->
+
+  <section
+   class="panel cart-panel">
+
+   <h2 class="panel-title">
+    المنتجات المختارة
+   </h2>
+
+
+   <div id="cartItems">
+   </div>
+
+  </section>
+
+
+  <!-- =================================
+       بيانات العميل
+  ================================== -->
+
+  <aside
+   class="panel customer-panel"
+   id="customerPanel">
+
+
+   <h2 class="panel-title">
+    بيانات الطلب
+   </h2>
+
+
+   <form
+    class="customer-form"
+    id="customerForm"
+    novalidate>
+
+
+    <!-- الاسم -->
+
+    <label for="customerName">
+
+     الاسم الكامل
+
+     <span class="required">
+      *
+     </span>
+
+    </label>
+
+    <input
+     type="text"
+     id="customerName"
+     autocomplete="name"
+     placeholder="اكتب اسمك الكامل">
+
+
+    <!-- الهاتف -->
+
+    <label for="customerPhone">
+
+     رقم الهاتف
+
+     <span class="required">
+      *
+     </span>
+
+    </label>
+
+    <input
+     type="tel"
+     id="customerPhone"
+     autocomplete="tel"
+     inputmode="tel"
+     placeholder="مثال: 777123456">
+
+
+    <!-- الدولة والمدينة -->
+
+    <div class="form-row">
+
+
+     <div>
+
+      <label for="customerCountry">
+
+       الدولة
+
+       <span class="required">
+        *
+       </span>
+
+      </label>
+
+
+      <select
+       id="customerCountry">
+
+       <option value="">
+        اختر الدولة
+       </option>
+
+       <option value="اليمن">
+        اليمن
+       </option>
+
+       <option value="السعودية">
+        السعودية
+       </option>
+
+       <option value="الإمارات">
+        الإمارات
+       </option>
+
+       <option value="عُمان">
+        عُمان
+       </option>
+
+       <option value="قطر">
+        قطر
+       </option>
+
+       <option value="الكويت">
+        الكويت
+       </option>
+
+       <option value="البحرين">
+        البحرين
+       </option>
+
+       <option value="ألمانيا">
+        ألمانيا
+       </option>
+
+       <option value="فرنسا">
+        فرنسا
+       </option>
+
+       <option value="بريطانيا">
+        بريطانيا
+       </option>
+
+       <option value="هولندا">
+        هولندا
+       </option>
+
+       <option value="أخرى">
+        دولة أخرى
+       </option>
+
+      </select>
+
+     </div>
+
+
+     <div>
+
+      <label for="customerCity">
+
+       المدينة / المنطقة
+
+       <span class="required">
+        *
+       </span>
+
+      </label>
+
+      <input
+       type="text"
+       id="customerCity"
+       autocomplete="address-level2"
+       placeholder="المدينة">
+
+     </div>
+
+
+    </div>
+
+
+    <!-- العنوان -->
+
+    <label for="customerAddress">
+
+     عنوان التوصيل
+
+     <span class="required">
+      *
+     </span>
+
+    </label>
+
+    <textarea
+     id="customerAddress"
+     autocomplete="street-address"
+     placeholder="الحي، الشارع، وأي تفاصيل تساعد في التوصيل"></textarea>
+
+
+    <!-- الملاحظات -->
+
+    <label for="customerNotes">
+
+     ملاحظات الطلب
+
+    </label>
+
+    <textarea
+     id="customerNotes"
+     placeholder="أي ملاحظات إضافية على الطلب..."></textarea>
+
+
+    <small class="help">
+
+     سيتم إرسال هذه البيانات مع تفاصيل المنتجات
+     إلى المتجر عبر واتساب.
+
+    </small>
+
+
+    <!-- رسالة التحقق -->
+
+    <div
+     class="form-message"
+     id="formMessage">
+    </div>
+
+
+    <!-- الملخص -->
+
+    <div class="summary">
+
+     <div class="summary-row">
+
+      <span>
+       عدد أنواع المنتجات:
+      </span>
+
+      <strong id="productTypes">
+       0
+      </strong>
+
+     </div>
+
+
+     <div class="summary-row">
+
+      <span>
+       إجمالي الكمية:
+      </span>
+
+      <strong id="totalItems">
+       0
+      </strong>
+
+     </div>
+
+    </div>
+
+
+    <div class="note">
+
+     الأسعار غير معروضة في الموقع حاليًا.
+     بعد إرسال الطلب سيقوم فريق النخبة
+     بتأكيد السعر وتكلفة التوصيل معك عبر واتساب.
+
+    </div>
+
+
+    <!-- الأزرار -->
+
+    <div class="actions">
+
+     <button
+      type="submit"
+      class="whatsapp">
+
+      إتمام الطلب عبر واتساب ✓
+
+     </button>
+
+
+     <button
+      type="button"
+      class="clear"
+      id="clearCart">
+
+      تفريغ السلة
+
+     </button>
+
+    </div>
+
+
+   </form>
+
+  </aside>
+
+ </div>
+
+</main>
+
+
+<!-- =====================================
+     المميزات
+===================================== -->
+
+<section
+ class="benefits"
+ id="benefits">
+
+ <div class="benefit">
+
+  <b>
+   🌿 منتجات مختارة
+  </b>
+
+  جودة نهتم بها
+
+ </div>
+
+
+ <div class="benefit">
+
+  <b>
+   🚚 توصيل سريع وآمن
+  </b>
+
+  اليمن ودول الخليج وأوروبا
+
+ </div>
+
+
+ <div class="benefit">
+
+  <b>
+   📦 تغليف فاخر وآمن
+  </b>
+
+  للحفاظ على جودة المنتجات
+
+ </div>
+
+
+ <div class="benefit">
+
+  <b>
+   🎧 خدمة العملاء
+  </b>
+
+  للاستفسار وإتمام الطلب
+
+ </div>
+
+</section>
+
+
+<script>
+
+/* ==================================================
+   إعدادات المتجر
+================================================== */
+
+const WHATSAPP_NUMBER =
+ "967734800094";
+
+const CART_STORAGE_KEY =
+ "cart";
+
+const CUSTOMER_STORAGE_KEY =
+ "eliteCustomer";
+
+
+/* ==================================================
+   حماية النص عند عرضه داخل HTML
+================================================== */
+
+function escapeHTML(value){
+
+ return String(value ?? "")
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+}
+
+
+/* ==================================================
+   قراءة السلة
+================================================== */
+
+function getCart(){
+
+ try{
+
+  const data =
+   JSON.parse(
+    localStorage.getItem(
+     CART_STORAGE_KEY
+    )
+   ) || [];
+
+
+  return Array.isArray(data)
+   ? data
+   : [];
+
+ }catch(error){
+
+  console.error(
+   "تعذر قراءة السلة:",
+   error
+  );
+
+  return [];
+
+ }
+
+}
+
+
+/* ==================================================
+   حفظ السلة
+================================================== */
+
+function saveCart(cart){
+
+ localStorage.setItem(
+  CART_STORAGE_KEY,
+  JSON.stringify(cart)
+ );
+
+}
+
+
+/* ==================================================
+   عرض السلة
+================================================== */
+
+function showCart(){
+
+ const cart =
+  getCart();
+
+
+ const container =
+  document.getElementById(
+   "cartItems"
+  );
+
+
+ const customerPanel =
+  document.getElementById(
+   "customerPanel"
+  );
+
+
+ container.innerHTML =
+  "";
+
+
+ /* ======================================
+    السلة فارغة
+ ====================================== */
+
+ if(
+  cart.length === 0
+ ){
+
+  container.innerHTML = `
+
+   <div class="empty">
+
+    <div class="empty-icon">
+     🛒
+    </div>
+
+    <h2>
+     السلة فارغة
+    </h2>
+
+    <p>
+
+     لم تقم بإضافة أي منتجات إلى
+     سلة التسوق حتى الآن.
+
+    </p>
+
+    <a href="shop.html">
+     تصفح المنتجات
+    </a>
+
+   </div>
+
+  `;
+
+
+  customerPanel.style.display =
+   "none";
+
+
+  updateSummary();
+
+
+  return;
+
+ }
+
+
+ customerPanel.style.display =
+  "block";
+
+
+ /* ======================================
+    عرض المنتجات
+ ====================================== */
+
+ cart.forEach(
+  (item,index)=>{
+
+
+   const quantity =
+    Math.max(
+     1,
+     Number(item.quantity || 1)
+    );
+
+
+   const element =
+    document.createElement(
+     "div"
+    );
+
+
+   element.className =
+    "cart-item";
+
+
+   element.innerHTML = `
+
+    <img
+     src="${escapeHTML(item.image)}"
+     alt="${escapeHTML(item.name)}">
+
+
+    <div class="info">
+
+     <h3>
+      ${escapeHTML(item.name)}
+     </h3>
+
+
+     <p>
+
+      الوزن:
+
+      <strong>
+       ${escapeHTML(item.weight)}
+      </strong>
+
+     </p>
+
+
+     <div class="quantity">
+
+      <span>
+       الكمية:
+      </span>
+
+
+      <button
+       type="button"
+       data-action="decrease"
+       data-index="${index}"
+       aria-label="تقليل الكمية">
+
+       −
+
+      </button>
+
+
+      <strong>
+       ${quantity}
+      </strong>
+
+
+      <button
+       type="button"
+       data-action="increase"
+       data-index="${index}"
+       aria-label="زيادة الكمية">
+
+       +
+
+      </button>
+
+     </div>
+
+    </div>
+
+
+    <button
+     type="button"
+     class="remove"
+     data-action="remove"
+     data-index="${index}">
+
+     حذف
+
+    </button>
+
+   `;
+
+
+   container.appendChild(
+    element
+   );
+
+  }
+ );
+
+
+ updateSummary();
+
+}
+
+
+/* ==================================================
+   تعديل الكمية
+================================================== */
+
+function changeQuantity(
+ index,
+ change
+){
+
+ const cart =
+  getCart();
+
+
+ if(!cart[index]){
+
+  return;
+
+ }
+
+
+ let quantity =
+  Number(
+   cart[index].quantity || 1
+  );
+
+
+ quantity +=
+  change;
+
+
+ /*
+ إذا وصلت الكمية إلى صفر
+ نحذف العنصر.
+ */
+
+ if(
+  quantity <= 0
+ ){
+
+  cart.splice(
+   index,
+   1
+  );
+
+ }else{
+
+  cart[index].quantity =
+   quantity;
+
+ }
+
+
+ saveCart(
+  cart
+ );
+
+
+ showCart();
+
+}
+
+
+/* ==================================================
+   حذف منتج
+================================================== */
+
+function removeItem(index){
+
+ const cart =
+  getCart();
+
+
+ if(!cart[index]){
+
+  return;
+
+ }
+
+
+ const productName =
+  cart[index].name ||
+  "المنتج";
+
+
+ const confirmed =
+  confirm(
+   'هل تريد حذف "' +
+   productName +
+   '" من السلة؟'
+  );
+
+
+ if(!confirmed){
+
+  return;
+
+ }
+
+
+ cart.splice(
+  index,
+  1
+ );
+
+
+ saveCart(
+  cart
+ );
+
+
+ showCart();
+
+}
+
+
+/* ==================================================
+   أحداث المنتجات
+
+   استخدمنا event delegation بدل onclick
+================================================== */
+
+document
+ .getElementById(
+  "cartItems"
+ )
+ .addEventListener(
+  "click",
+  event=>{
+
+
+   const button =
+    event.target.closest(
+     "[data-action]"
+    );
+
+
+   if(!button){
+
+    return;
+
+   }
+
+
+   const index =
+    Number(
+     button.dataset.index
+    );
+
+
+   const action =
+    button.dataset.action;
+
+
+   if(
+    !Number.isInteger(index)
+   ){
+
+    return;
+
+   }
+
+
+   if(
+    action === "increase"
+   ){
+
+    changeQuantity(
+     index,
+     1
+    );
+
+   }
+
+
+   if(
+    action === "decrease"
+   ){
+
+    changeQuantity(
+     index,
+     -1
+    );
+
+   }
+
+
+   if(
+    action === "remove"
+   ){
+
+    removeItem(
+     index
+    );
+
+   }
+
+  }
+ );
+
+
+/* ==================================================
+   تحديث ملخص الطلب
+================================================== */
+
+function updateSummary(){
+
+ const cart =
+  getCart();
+
+
+ const total =
+  cart.reduce(
+
+   (sum,item)=>
+
+    sum +
+    Number(
+     item.quantity || 1
+    ),
+
+   0
+
+  );
+
+
+ document
+  .getElementById(
+   "totalItems"
+  )
+  .textContent =
+  total;
+
+
+ document
+  .getElementById(
+   "productTypes"
+  )
+  .textContent =
+  cart.length;
+
+}
+
+
+/* ==================================================
+   تفريغ السلة
+================================================== */
+
+document
+ .getElementById(
+  "clearCart"
+ )
+ .addEventListener(
+  "click",
+  ()=>{
+
+
+   const cart =
+    getCart();
+
+
+   if(
+    cart.length === 0
+   ){
+
+    return;
+
+   }
+
+
+   const confirmed =
+    confirm(
+     "هل تريد تفريغ السلة بالكامل؟"
+    );
+
+
+   if(!confirmed){
+
+    return;
+
+   }
+
+
+   localStorage.removeItem(
+    CART_STORAGE_KEY
+   );
+
+
+   showCart();
+
+  }
+ );
+
+
+/* ==================================================
+   قراءة بيانات العميل المحفوظة
+================================================== */
+
+function getCustomer(){
+
+ try{
+
+  const data =
+   JSON.parse(
+    localStorage.getItem(
+     CUSTOMER_STORAGE_KEY
+    )
+   );
+
+
+  if(
+   data &&
+   typeof data === "object"
+  ){
+
+   return data;
+
+  }
+
+ }catch(error){
+
+  console.error(
+   "تعذر قراءة بيانات العميل:",
+   error
+  );
+
+ }
+
+
+ return {};
+
+}
+
+
+/* ==================================================
+   حفظ بيانات العميل
+================================================== */
+
+function saveCustomer(
+ customer
+){
+
+ try{
+
+  localStorage.setItem(
+   CUSTOMER_STORAGE_KEY,
+   JSON.stringify(
+    customer
+   )
+  );
+
+ }catch(error){
+
+  console.error(
+   "تعذر حفظ بيانات العميل:",
+   error
+  );
+
+ }
+
+}
+
+
+/* ==================================================
+   تعبئة البيانات المحفوظة
+================================================== */
+
+function loadCustomer(){
+
+ const customer =
+  getCustomer();
+
+
+ document
+  .getElementById(
+   "customerName"
+  )
+  .value =
+  customer.name || "";
+
+
+ document
+  .getElementById(
+   "customerPhone"
+  )
+  .value =
+  customer.phone || "";
+
+
+ document
+  .getElementById(
+   "customerCountry"
+  )
+  .value =
+  customer.country || "";
+
+
+ document
+  .getElementById(
+   "customerCity"
+  )
+  .value =
+  customer.city || "";
+
+
+ document
+  .getElementById(
+   "customerAddress"
+  )
+  .value =
+  customer.address || "";
+
+
+ /*
+ الملاحظات لا نحفظها افتراضيًا
+ لأنها غالبًا تخص كل طلب.
+ */
+
+}
+
+
+/* ==================================================
+   جمع بيانات العميل
+================================================== */
+
+function collectCustomerData(){
+
+ return {
+
+  name:
+   document
+    .getElementById(
+     "customerName"
+    )
+    .value
+    .trim(),
+
+  phone:
+   document
+    .getElementById(
+     "customerPhone"
+    )
+    .value
+    .trim(),
+
+  country:
+   document
+    .getElementById(
+     "customerCountry"
+    )
+    .value
+    .trim(),
+
+  city:
+   document
+    .getElementById(
+     "customerCity"
+    )
+    .value
+    .trim(),
+
+  address:
+   document
+    .getElementById(
+     "customerAddress"
+    )
+    .value
+    .trim(),
+
+  notes:
+   document
+    .getElementById(
+     "customerNotes"
+    )
+    .value
+    .trim()
+
+ };
+
+}
+
+
+/* ==================================================
+   عرض خطأ النموذج
+================================================== */
+
+function showFormMessage(
+ message
+){
+
+ const box =
+  document.getElementById(
+   "formMessage"
+  );
+
+
+ box.textContent =
+  message;
+
+
+ box.style.display =
+  "block";
+
+
+ box.scrollIntoView({
+
+  behavior:"smooth",
+
+  block:"center"
+
+ });
+
+}
+
+
+/* ==================================================
+   إخفاء خطأ النموذج
+================================================== */
+
+function hideFormMessage(){
+
+ document
+  .getElementById(
+   "formMessage"
+  )
+  .style.display =
+  "none";
+
+}
+
+
+/* ==================================================
+   التحقق من بيانات العميل
+================================================== */
+
+function validateCustomer(
+ customer
+){
+
+ if(!customer.name){
+
+  return "يرجى كتابة الاسم الكامل.";
+
+ }
+
+
+ if(
+  customer.name.length < 2
+ ){
+
+  return "يرجى كتابة اسم صحيح.";
+
+ }
+
+
+ if(!customer.phone){
+
+  return "يرجى كتابة رقم الهاتف.";
+
+ }
+
+
+ /*
+ نسمح بالأرقام والمسافات
+ وعلامة + والشرطة فقط.
+ */
+
+ const phonePattern =
+  /^[0-9+\-\s()]{6,20}$/;
+
+
+ if(
+  !phonePattern.test(
+   customer.phone
+  )
+ ){
+
+  return "يرجى كتابة رقم هاتف صحيح.";
+
+ }
+
+
+ if(!customer.country){
+
+  return "يرجى اختيار الدولة.";
+
+ }
+
+
+ if(!customer.city){
+
+  return "يرجى كتابة المدينة أو المنطقة.";
+
+ }
+
+
+ if(!customer.address){
+
+  return "يرجى كتابة عنوان التوصيل.";
+
+ }
+
+
+ return "";
+
+}
+
+
+/* ==================================================
+   إنشاء رسالة واتساب
+================================================== */
+
+function createWhatsAppMessage(
+ cart,
+ customer
+){
+
+ let message =
+
+  "السلام عليكم، أرغب بإتمام طلب من متجر النخبة.\n\n";
+
+
+ /*
+ بيانات العميل
+ */
+
+ message +=
+  "👤 بيانات العميل\n";
+
+ message +=
+  "الاسم: " +
+  customer.name +
+  "\n";
+
+ message +=
+  "الهاتف: " +
+  customer.phone +
+  "\n";
+
+ message +=
+  "الدولة: " +
+  customer.country +
+  "\n";
+
+ message +=
+  "المدينة / المنطقة: " +
+  customer.city +
+  "\n";
+
+ message +=
+  "عنوان التوصيل: " +
+  customer.address +
+  "\n";
+
+
+ /*
+ فاصل
+ */
+
+ message +=
+  "\n--------------------\n\n";
+
+
+ /*
+ المنتجات
+ */
+
+ message +=
+  "🛒 تفاصيل الطلب\n\n";
+
+
+ cart.forEach(
+  (item,index)=>{
+
+
+   message +=
+    (index + 1) +
+    "- " +
+    (item.name || "منتج") +
+    "\n";
+
+
+   message +=
+    "الوزن: " +
+    (item.weight || "-") +
+    "\n";
+
+
+   message +=
+    "الكمية: " +
+    Number(
+     item.quantity || 1
+    ) +
+    "\n";
+
+
+   if(
+    index <
+    cart.length - 1
+   ){
+
+    message +=
+     "\n";
+
+   }
+
+  }
+ );
+
+
+ /*
+ إجمالي الكمية
+ */
+
+ const total =
+  cart.reduce(
+
+   (sum,item)=>
+
+    sum +
+    Number(
+     item.quantity || 1
+    ),
+
+   0
+
+  );
+
+
+ message +=
+  "\n\nإجمالي الكمية: " +
+  total +
+  "\n";
+
+
+ /*
+ الملاحظات
+ */
+
+ if(
+  customer.notes
+ ){
+
+  message +=
+   "\n📝 ملاحظات الطلب:\n";
+
+  message +=
+   customer.notes +
+   "\n";
+
+ }
+
+
+ message +=
+  "\nأرجو تأكيد توفر المنتجات والسعر وتكلفة التوصيل وإتمام الطلب.";
+
+
+ return message;
+
+}
+
+
+/* ==================================================
+   إرسال الطلب عبر واتساب
+================================================== */
+
+document
+ .getElementById(
+  "customerForm"
+ )
+ .addEventListener(
+  "submit",
+  event=>{
+
+
+   event.preventDefault();
+
+
+   hideFormMessage();
+
+
+   const cart =
+    getCart();
+
+
+   /*
+   التأكد من أن السلة ليست فارغة
+   */
+
+   if(
+    cart.length === 0
+   ){
+
+    showFormMessage(
+     "السلة فارغة. أضف منتجًا أولاً."
+    );
+
+
+    return;
+
+   }
+
+
+   /*
+   بيانات العميل
+   */
+
+   const customer =
+    collectCustomerData();
+
+
+   /*
+   التحقق
+   */
+
+   const validationError =
+    validateCustomer(
+     customer
+    );
+
+
+   if(validationError){
+
+    showFormMessage(
+     validationError
+    );
+
+
+    return;
+
+   }
+
+
+   /*
+   حفظ بيانات العميل للاستخدام لاحقًا
+
+   لا نحفظ الملاحظات لأنها خاصة بالطلب.
+   */
+
+   saveCustomer({
+
+    name:
+     customer.name,
+
+    phone:
+     customer.phone,
+
+    country:
+     customer.country,
+
+    city:
+     customer.city,
+
+    address:
+     customer.address
+
+   });
+
+
+   /*
+   إنشاء الرسالة
+   */
+
+   const message =
+    createWhatsAppMessage(
+     cart,
+     customer
+    );
+
+
+   /*
+   رابط واتساب
+   */
+
+   const url =
+
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=" +
+    encodeURIComponent(
+     message
+    );
+
+
+   /*
+   الانتقال إلى واتساب
+   */
+
+   window.location.href =
+    url;
+
+  }
+ );
+
+
+/* ==================================================
+   مزامنة السلة بين التبويبات
+================================================== */
+
+window.addEventListener(
+ "storage",
+ event=>{
+
+  if(
+   event.key ===
+   CART_STORAGE_KEY
+  ){
+
+   showCart();
+
+  }
+
+ }
+);
+
+
+/* ==================================================
+   تحديث الصفحة عند الرجوع إليها
+================================================== */
+
+window.addEventListener(
+ "pageshow",
+ ()=>{
+
+  showCart();
+
+ }
+);
+
+
+/* ==================================================
+   التشغيل
+================================================== */
+
+loadCustomer();
+
+showCart();
+
+</script>
+
+</body>
+</html>
